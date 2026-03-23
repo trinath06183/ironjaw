@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form | Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+.ember {
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+    animation: ember-rise linear infinite;
+    background: radial-gradient(circle, #fff8 0%, var(--red) 40%, transparent 70%);
+  }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Naya Account Banayein</h2>
+        
+        <form action="#" method="POST" class="space-y-4">
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">FULL NAME</label>
+                <input type="text" placeholder="Enter your Name " class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Gmail ID</label>
+                <input type="email" placeholder="Enter your gmail " class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="tel" placeholder="+91 00000-00000" class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                <div class="flex space-x-4">
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="gender" value="male" class="text-blue-600">
+                        <span>Male</span>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="gender" value="female" class="text-blue-600">
+                        <span>Female</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 bg-blue-50 p-3 rounded-md border border-blue-100">
+                <input type="checkbox" id="free_trial" class="w-4 h-4 text-blue-600 rounded">
+                <label for="free_trial" class="text-sm text-blue-800 font-semibold">
+                    Haan, mujhe 1 month free trial chahiye! 🎁
+                </label>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 shadow-md transform active:scale-95">
+                Submit Karein
+            </button>
+
+        </form>
+    </div>
+
+</body>
+</html>
