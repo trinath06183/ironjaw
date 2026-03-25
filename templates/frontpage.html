@@ -1,966 +1,1399 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>IRONJAW — Boxing & Fighter Training</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --red: #e31212;
-    --red-dark: #8b0000;
-    --red-glow: #ff2222;
-    --gold: #c9a84c;
-    --black: #050505;
-    --charcoal: #111111;
-    --white: #f0f0f0;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRONJAW — Boxing & Fighter Training</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --red: #e31212;
+      --red-dark: #8b0000;
+      --red-glow: #ff2222;
+      --gold: #c9a84c;
+      --black: #050505;
+      --charcoal: #111111;
+      --white: #f0f0f0;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Rajdhani', sans-serif;
-    overflow-x: hidden;
-    cursor: crosshair;
-  }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
 
-  /* ── ANGER / HOT TYPE ANIMATIONS ── */
-  @keyframes flicker {
-    0%,100%{opacity:1} 5%{opacity:.85} 10%{opacity:1} 15%{opacity:.9} 20%{opacity:1} 45%{opacity:.95} 50%{opacity:1} 75%{opacity:.88} 80%{opacity:1}
-  }
-  @keyframes shake {
-    0%,100%{transform:translate(0,0) rotate(0)} 10%{transform:translate(-2px,1px) rotate(-.3deg)} 20%{transform:translate(2px,-1px) rotate(.3deg)} 30%{transform:translate(-1px,2px)} 40%{transform:translate(1px,-2px)} 50%{transform:translate(-2px,0)} 60%{transform:translate(2px,1px)} 70%{transform:translate(-1px,-1px)} 80%{transform:translate(1px,2px)} 90%{transform:translate(-2px,-1px)}
-  }
-  @keyframes pulse-glow {
-    0%,100%{text-shadow:0 0 10px var(--red-glow),0 0 30px var(--red),0 0 60px var(--red-dark)}
-    50%{text-shadow:0 0 20px var(--red-glow),0 0 60px var(--red),0 0 120px var(--red-dark),0 0 200px rgba(255,0,0,.3)}
-  }
-  @keyframes ember-rise {
-    0%{transform:translateY(0) scale(1);opacity:.8}
-    100%{transform:translateY(-120vh) scale(.2);opacity:0}
-  }
-  @keyframes crack-in {
-    0%{clip-path:inset(0 100% 0 0);opacity:0}
-    100%{clip-path:inset(0 0% 0 0);opacity:1}
-  }
-  @keyframes smash-in {
-    0%{transform:scale(3) rotate(-5deg);opacity:0;filter:blur(10px)}
-    60%{transform:scale(.95) rotate(.5deg);opacity:1;filter:blur(0)}
-    80%{transform:scale(1.03)}
-    100%{transform:scale(1);filter:blur(0)}
-  }
-  @keyframes slide-up {
-    0%{transform:translateY(60px);opacity:0}
-    100%{transform:translateY(0);opacity:1}
-  }
-  @keyframes border-burn {
-    0%,100%{border-color:var(--red);box-shadow:0 0 8px var(--red)}
-    50%{border-color:#ff5555;box-shadow:0 0 25px var(--red-glow),0 0 50px rgba(255,50,50,.3)}
-  }
-  @keyframes scanline {
-    0%{background-position:0 0}
-    100%{background-position:0 100px}
-  }
-  @keyframes spin-slow {
-    from{transform:rotate(0deg)}
-    to{transform:rotate(360deg)}
-  }
+    /* ── ANGER / HOT TYPE ANIMATIONS ── */
+    @keyframes flicker {
 
-  
-  @keyframes blood-drip {
-    0%{height:0;opacity:1}
-    80%{height:60px;opacity:1}
-    100%{height:60px;opacity:0}
-  }
-  @keyframes typewriter {
-    from{width:0}
-    to{width:100%}
-  }
-  @keyframes blink-cursor {
-    0%,100%{border-color:var(--red)}
-    50%{border-color:transparent}
-  }
-  @keyframes impact-scale {
-    0%{transform:scale(1)}
-    50%{transform:scale(1.05)}
-    100%{transform:scale(1)}
-  }
-  @keyframes glitch {
-    0%,100%{clip-path:inset(0 0 98% 0);transform:translate(-3px,0)}
-    10%{clip-path:inset(10% 0 80% 0);transform:translate(3px,0)}
-    20%{clip-path:inset(30% 0 50% 0);transform:translate(-3px,0)}
-    30%{clip-path:inset(50% 0 30% 0);transform:translate(3px,0)}
-    40%{clip-path:inset(70% 0 10% 0);transform:translate(-3px,0)}
-    50%{clip-path:inset(0 0 98% 0);transform:translate(0,0)}
-  }
-  @keyframes float-badge {
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
-  }
+      0%,
+      100% {
+        opacity: 1
+      }
 
-  .font-impact { font-family: 'Black Ops One', cursive; }
-  .font-bebas { font-family: 'Bebas Neue', cursive; }
+      5% {
+        opacity: .85
+      }
 
-  /* FIRE EMBERS */
-  .ember {
-    position:absolute;
-    border-radius:50%;
-    pointer-events:none;
-    animation: ember-rise linear infinite;
-    background: radial-gradient(circle, #fff8 0%, var(--red) 40%, transparent 70%);
-  }
+      10% {
+        opacity: 1
+      }
 
-  /* HERO BG */
-  .hero-bg {
-    background:
-      linear-gradient(160deg, rgba(140,0,0,.55) 0%, rgba(5,5,5,.92) 60%),
-      url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1600&q=80') center/cover no-repeat;
-  }
+      15% {
+        opacity: .9
+      }
 
-  /* SCANLINE OVERLAY */
-  .scanlines::after {
-    content:'';
-    position:absolute;inset:0;
-    background: repeating-linear-gradient(0deg, rgba(0,0,0,.15) 0px, rgba(0,0,0,.15) 1px, transparent 1px, transparent 2px);
-    pointer-events:none;z-index:10;
-  }
+      20% {
+        opacity: 1
+      }
 
-  /* GLITCH TEXT */
-  .glitch { position:relative; }
-  .glitch::before,.glitch::after {
-    content:attr(data-text);
-    position:absolute;inset:0;
-    font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;
-  }
-  .glitch::before {
-    color:#ff0044;
-    animation:glitch 3s infinite;
-    clip-path:inset(0 0 50% 0);
-  }
-  .glitch::after {
-    color:#00cfff;
-    animation:glitch 3s infinite .15s;
-    clip-path:inset(50% 0 0 0);
-  }
+      45% {
+        opacity: .95
+      }
 
-  /* NAV */
-  nav {
-    position:fixed;top:0;left:0;right:0;z-index:1000;
-    background:rgba(5,5,5,.85);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(227,18,18,.3);
-    box-shadow:0 0 30px rgba(227,18,18,.1);
-  }
+      50% {
+        opacity: 1
+      }
 
-  /* BUTTONS */
-  .btn-primary {
-    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, #ff4444 100%);
-    color:#fff;
-    font-family:'Bebas Neue',cursive;
-    letter-spacing:.1em;
-    border:none;
-    position:relative;overflow:hidden;
-    transition:all .3s;
-    box-shadow:0 0 20px rgba(227,18,18,.4);
-  }
-  .btn-primary::before {
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(135deg,transparent 0%,rgba(255,255,255,.15) 50%,transparent 100%);
-    transform:translateX(-100%);transition:transform .4s;
-  }
-  .btn-primary:hover::before { transform:translateX(100%); }
-  .btn-primary:hover {
-    box-shadow:0 0 40px rgba(255,50,50,.7),0 0 80px rgba(255,0,0,.3);
-    transform:translateY(-2px) scale(1.02);
-  }
-  .btn-primary:active { transform:scale(.97); }
+      75% {
+        opacity: .88
+      }
 
-  .btn-secondary {
-    background:transparent;
-    border:2px solid var(--red);
-    color:var(--white);
-    font-family:'Bebas Neue',cursive;
-    letter-spacing:.1em;
-    transition:all .3s;
-    animation:border-burn 2s ease-in-out infinite;
-  }
-  .btn-secondary:hover {
-    background:rgba(227,18,18,.15);
-    box-shadow:0 0 30px rgba(227,18,18,.5);
-    transform:translateY(-2px);
-  }
+      80% {
+        opacity: 1
+      }
+    }
 
-  /* SECTION DIVIDER */
-  .divider-fire {
-    height:3px;
-    background:linear-gradient(90deg,transparent,var(--red),#ff6600,var(--red),transparent);
-    box-shadow:0 0 15px var(--red);
-    position:relative;
-  }
+    @keyframes shake {
 
-  /* FEATURE CARD */
-  .feature-card {
-    background:linear-gradient(135deg,rgba(20,0,0,.6),rgba(30,10,10,.4));
-    border:1px solid rgba(227,18,18,.25);
-    transition:all .4s;
-    position:relative;overflow:hidden;
-  }
-  .feature-card::before {
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,transparent,var(--red),transparent);
-    transform:scaleX(0);transition:transform .4s;
-  }
-  .feature-card:hover::before { transform:scaleX(1); }
-  .feature-card:hover {
-    border-color:rgba(227,18,18,.6);
-    box-shadow:0 0 30px rgba(227,18,18,.2),inset 0 0 30px rgba(227,18,18,.05);
-    transform:translateY(-4px);
-  }
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0)
+      }
 
-  /* PRICING CARD */
-  .pricing-card {
-    background:linear-gradient(145deg,#0d0d0d,#1a0000);
-    border:1px solid rgba(227,18,18,.3);
-    transition:all .4s;position:relative;overflow:hidden;
-  }
-  .pricing-card.featured {
-    border:2px solid var(--red);
-    box-shadow:0 0 40px rgba(227,18,18,.3);
-  }
-  .pricing-card:hover { transform:translateY(-8px); box-shadow:0 0 60px rgba(227,18,18,.4); }
+      10% {
+        transform: translate(-2px, 1px) rotate(-.3deg)
+      }
 
-  /* TRAINER CARD */
-  .trainer-card {
-    position:relative;overflow:hidden;
-    border:1px solid rgba(227,18,18,.2);
-    transition:all .4s;
-  }
-  .trainer-card:hover { border-color:var(--red); box-shadow:0 0 40px rgba(227,18,18,.3); }
-  .trainer-card .overlay {
-    position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(5,5,5,.95) 0%,transparent 60%);
-    transition:all .4s;
-  }
-  .trainer-card:hover .overlay { background:linear-gradient(to top,rgba(140,0,0,.85) 0%,transparent 70%); }
+      20% {
+        transform: translate(2px, -1px) rotate(.3deg)
+      }
 
-  /* TESTIMONIAL */
-  .testi-card {
-    background:linear-gradient(135deg,#0f0000,#1a0505);
-    border:1px solid rgba(227,18,18,.2);
-    transition:all .4s;position:relative;
-  }
-  .testi-card::before {
-    content:'"';
-    position:absolute;top:-20px;left:20px;
-    font-size:120px;font-family:'Bebas Neue',cursive;
-    color:rgba(227,18,18,.1);line-height:1;
-  }
-  .testi-card:hover { box-shadow:0 0 30px rgba(227,18,18,.2); border-color:rgba(227,18,18,.5); }
+      30% {
+        transform: translate(-1px, 2px)
+      }
 
-  /* HERO HEADLINE ANIMATE */
-  .hero-h1 { animation:smash-in .8s cubic-bezier(.2,.8,.2,1) forwards; }
-  .hero-sub { animation:slide-up .7s ease .4s both; }
-  .hero-btns { animation:slide-up .7s ease .6s both; }
+      40% {
+        transform: translate(1px, -2px)
+      }
 
-  /* ANGER TEXT */
-  .anger-text {
-    animation:pulse-glow 1.8s ease-in-out infinite, flicker 8s linear infinite;
-  }
+      50% {
+        transform: translate(-2px, 0)
+      }
 
-  /* NOISE OVERLAY */
-  .noise::before {
-    content:'';position:absolute;inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
-    opacity:.04;pointer-events:none;z-index:1;
-  }
+      60% {
+        transform: translate(2px, 1px)
+      }
 
-  /* SCROLL REVEAL */
-  .reveal { opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.2,.8,.2,1); }
-  .reveal.visible { opacity:1;transform:translateY(0); }
-  .reveal-left { opacity:0;transform:translateX(-60px);transition:all .7s cubic-bezier(.2,.8,.2,1); }
-  .reveal-left.visible { opacity:1;transform:translateX(0); }
-  .reveal-right { opacity:0;transform:translateX(60px);transition:all .7s cubic-bezier(.2,.8,.2,1); }
-  .reveal-right.visible { opacity:1;transform:translateX(0); }
+      70% {
+        transform: translate(-1px, -1px)
+      }
 
-  /* VIDEO SECTION */
-  .video-overlay {
-    background:linear-gradient(135deg,rgba(140,0,0,.5),rgba(0,0,0,.7));
-  }
+      80% {
+        transform: translate(1px, 2px)
+      }
 
-  /* LOGO RING */
-  .logo-ring {
-    animation:spin-slow 8s linear infinite;
-  }
-  .logo-inner {
-    animation:counter-spin 8s linear infinite;
-  }
+      90% {
+        transform: translate(-2px, -1px)
+      }
+    }
 
-  /* STATS */
-  .stat-num {
-    font-family:'Black Ops One',cursive;
-    color:var(--red);
-    animation:pulse-glow 2s ease-in-out infinite;
-  }
+    @keyframes pulse-glow {
 
-  /* BADGE FLOAT */
-  .badge-float { animation:float-badge 3s ease-in-out infinite; }
+      0%,
+      100% {
+        text-shadow: 0 0 10px var(--red-glow), 0 0 30px var(--red), 0 0 60px var(--red-dark)
+      }
 
-  /* MOBILE MENU */
-  #mobile-menu { display:none; }
-  #mobile-menu.open { display:block; }
+      50% {
+        text-shadow: 0 0 20px var(--red-glow), 0 0 60px var(--red), 0 0 120px var(--red-dark), 0 0 200px rgba(255, 0, 0, .3)
+      }
+    }
 
-  /* IMPACT WORDS */
-  .impact-word {
-    display:inline-block;
-    animation:impact-scale 2s ease-in-out infinite;
-  }
+    @keyframes ember-rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: .8
+      }
 
-  /* COUNTDOWN RINGS */
-  .ring-svg circle { stroke-dasharray:251; stroke-dashoffset:0; transition:stroke-dashoffset 2s ease; }
+      100% {
+        transform: translateY(-120vh) scale(.2);
+        opacity: 0
+      }
+    }
 
-  /* FIRE LINE */
-  .fire-line {
-    background:linear-gradient(90deg,transparent,#ff4400,#ff8800,#ffcc00,#ff8800,#ff4400,transparent);
-    height:2px;
-    animation:flicker 1.5s infinite;
-  }
+    @keyframes crack-in {
+      0% {
+        clip-path: inset(0 100% 0 0);
+        opacity: 0
+      }
 
-  /* HOTTYPE UNDERLINE */
-  .hot-underline {
-    position:relative;display:inline-block;
-  }
-  .hot-underline::after {
-    content:'';
-    position:absolute;bottom:-4px;left:0;right:0;height:3px;
-    background:linear-gradient(90deg,var(--red),#ff6600,var(--red));
-    box-shadow:0 0 10px var(--red);
-    animation:flicker 2s infinite;
-  }
+      100% {
+        clip-path: inset(0 0% 0 0);
+        opacity: 1
+      }
+    }
 
-  /* SECTION LABEL */
-  .section-label {
-    font-family:'Bebas Neue',cursive;
-    letter-spacing:.3em;
-    color:var(--red);
-    font-size:.75rem;
-    text-transform:uppercase;
-  }
+    @keyframes smash-in {
+      0% {
+        transform: scale(3) rotate(-5deg);
+        opacity: 0;
+        filter: blur(10px)
+      }
 
-  /* CUSTOM SCROLLBAR */
-  ::-webkit-scrollbar { width:4px; }
-  ::-webkit-scrollbar-track { background:#0a0000; }
-  ::-webkit-scrollbar-thumb { background:var(--red); border-radius:2px; }
-</style>
+      60% {
+        transform: scale(.95) rotate(.5deg);
+        opacity: 1;
+        filter: blur(0)
+      }
+
+      80% {
+        transform: scale(1.03)
+      }
+
+      100% {
+        transform: scale(1);
+        filter: blur(0)
+      }
+    }
+
+    @keyframes slide-up {
+      0% {
+        transform: translateY(60px);
+        opacity: 0
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1
+      }
+    }
+
+    @keyframes border-burn {
+
+      0%,
+      100% {
+        border-color: var(--red);
+        box-shadow: 0 0 8px var(--red)
+      }
+
+      50% {
+        border-color: #ff5555;
+        box-shadow: 0 0 25px var(--red-glow), 0 0 50px rgba(255, 50, 50, .3)
+      }
+    }
+
+    @keyframes scanline {
+      0% {
+        background-position: 0 0
+      }
+
+      100% {
+        background-position: 0 100px
+      }
+    }
+
+    @keyframes spin-slow {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+
+    @keyframes blood-drip {
+      0% {
+        height: 0;
+        opacity: 1
+      }
+
+      80% {
+        height: 60px;
+        opacity: 1
+      }
+
+      100% {
+        height: 60px;
+        opacity: 0
+      }
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink-cursor {
+
+      0%,
+      100% {
+        border-color: var(--red)
+      }
+
+      50% {
+        border-color: transparent
+      }
+    }
+
+    @keyframes impact-scale {
+      0% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.05)
+      }
+
+      100% {
+        transform: scale(1)
+      }
+    }
+
+    @keyframes glitch {
+
+      0%,
+      100% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(-3px, 0)
+      }
+
+      10% {
+        clip-path: inset(10% 0 80% 0);
+        transform: translate(3px, 0)
+      }
+
+      20% {
+        clip-path: inset(30% 0 50% 0);
+        transform: translate(-3px, 0)
+      }
+
+      30% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(3px, 0)
+      }
+
+      40% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translate(-3px, 0)
+      }
+
+      50% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(0, 0)
+      }
+    }
+
+    @keyframes float-badge {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-10px)
+      }
+    }
+
+    .font-impact {
+      font-family: 'Black Ops One', cursive;
+    }
+
+    .font-bebas {
+      font-family: 'Bebas Neue', cursive;
+    }
+
+    /* FIRE EMBERS */
+    .ember {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: ember-rise linear infinite;
+      background: radial-gradient(circle, #fff8 0%, var(--red) 40%, transparent 70%);
+    }
+
+    /* HERO BG */
+    .hero-bg {
+      background:
+        linear-gradient(160deg, rgba(140, 0, 0, .55) 0%, rgba(5, 5, 5, .92) 60%),
+        url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1600&q=80') center/cover no-repeat;
+    }
+
+    /* SCANLINE OVERLAY */
+    .scanlines::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .15) 0px, rgba(0, 0, 0, .15) 1px, transparent 1px, transparent 2px);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* GLITCH TEXT */
+    .glitch {
+      position: relative;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
+
+    .glitch::before {
+      color: #ff0044;
+      animation: glitch 3s infinite;
+      clip-path: inset(0 0 50% 0);
+    }
+
+    .glitch::after {
+      color: #00cfff;
+      animation: glitch 3s infinite .15s;
+      clip-path: inset(50% 0 0 0);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(5, 5, 5, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(227, 18, 18, .3);
+      box-shadow: 0 0 30px rgba(227, 18, 18, .1);
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, #ff4444 100%);
+      color: #fff;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: .1em;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      transition: all .3s;
+      box-shadow: 0 0 20px rgba(227, 18, 18, .4);
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, .15) 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform .4s;
+    }
+
+    .btn-primary:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(255, 50, 50, .7), 0 0 80px rgba(255, 0, 0, .3);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn-primary:active {
+      transform: scale(.97);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--red);
+      color: var(--white);
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: .1em;
+      transition: all .3s;
+      animation: border-burn 2s ease-in-out infinite;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(227, 18, 18, .15);
+      box-shadow: 0 0 30px rgba(227, 18, 18, .5);
+      transform: translateY(-2px);
+    }
+
+    /* SECTION DIVIDER */
+    .divider-fire {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--red), #ff6600, var(--red), transparent);
+      box-shadow: 0 0 15px var(--red);
+      position: relative;
+    }
+
+    /* FEATURE CARD */
+    .feature-card {
+      background: linear-gradient(135deg, rgba(20, 0, 0, .6), rgba(30, 10, 10, .4));
+      border: 1px solid rgba(227, 18, 18, .25);
+      transition: all .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      transform: scaleX(0);
+      transition: transform .4s;
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-card:hover {
+      border-color: rgba(227, 18, 18, .6);
+      box-shadow: 0 0 30px rgba(227, 18, 18, .2), inset 0 0 30px rgba(227, 18, 18, .05);
+      transform: translateY(-4px);
+    }
+
+    /* PRICING CARD */
+    .pricing-card {
+      background: linear-gradient(145deg, #0d0d0d, #1a0000);
+      border: 1px solid rgba(227, 18, 18, .3);
+      transition: all .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--red);
+      box-shadow: 0 0 40px rgba(227, 18, 18, .3);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 60px rgba(227, 18, 18, .4);
+    }
+
+    /* TRAINER CARD */
+    .trainer-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(227, 18, 18, .2);
+      transition: all .4s;
+    }
+
+    .trainer-card:hover {
+      border-color: var(--red);
+      box-shadow: 0 0 40px rgba(227, 18, 18, .3);
+    }
+
+    .trainer-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5, 5, 5, .95) 0%, transparent 60%);
+      transition: all .4s;
+    }
+
+    .trainer-card:hover .overlay {
+      background: linear-gradient(to top, rgba(140, 0, 0, .85) 0%, transparent 70%);
+    }
+
+    /* TESTIMONIAL */
+    .testi-card {
+      background: linear-gradient(135deg, #0f0000, #1a0505);
+      border: 1px solid rgba(227, 18, 18, .2);
+      transition: all .4s;
+      position: relative;
+    }
+
+    .testi-card::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-size: 120px;
+      font-family: 'Bebas Neue', cursive;
+      color: rgba(227, 18, 18, .1);
+      line-height: 1;
+    }
+
+    .testi-card:hover {
+      box-shadow: 0 0 30px rgba(227, 18, 18, .2);
+      border-color: rgba(227, 18, 18, .5);
+    }
+
+    /* HERO HEADLINE ANIMATE */
+    .hero-h1 {
+      animation: smash-in .8s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    .hero-sub {
+      animation: slide-up .7s ease .4s both;
+    }
+
+    .hero-btns {
+      animation: slide-up .7s ease .6s both;
+    }
+
+    /* ANGER TEXT */
+    .anger-text {
+      animation: pulse-glow 1.8s ease-in-out infinite, flicker 8s linear infinite;
+    }
+
+    /* NOISE OVERLAY */
+    .noise::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      opacity: .04;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .7s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: all .7s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: all .7s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* VIDEO SECTION */
+    .video-overlay {
+      background: linear-gradient(135deg, rgba(140, 0, 0, .5), rgba(0, 0, 0, .7));
+    }
+
+    /* LOGO RING */
+    .logo-ring {
+      animation: spin-slow 8s linear infinite;
+    }
+
+    .logo-inner {
+      animation: counter-spin 8s linear infinite;
+    }
+
+    /* STATS */
+    .stat-num {
+      font-family: 'Black Ops One', cursive;
+      color: var(--red);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    /* BADGE FLOAT */
+    .badge-float {
+      animation: float-badge 3s ease-in-out infinite;
+    }
+
+    /* MOBILE MENU */
+    #mobile-menu {
+      display: none;
+    }
+
+    #mobile-menu.open {
+      display: block;
+    }
+
+    /* IMPACT WORDS */
+    .impact-word {
+      display: inline-block;
+      animation: impact-scale 2s ease-in-out infinite;
+    }
+
+    /* COUNTDOWN RINGS */
+    .ring-svg circle {
+      stroke-dasharray: 251;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 2s ease;
+    }
+
+    /* FIRE LINE */
+    .fire-line {
+      background: linear-gradient(90deg, transparent, #ff4400, #ff8800, #ffcc00, #ff8800, #ff4400, transparent);
+      height: 2px;
+      animation: flicker 1.5s infinite;
+    }
+
+    /* HOTTYPE UNDERLINE */
+    .hot-underline {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hot-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), #ff6600, var(--red));
+      box-shadow: 0 0 10px var(--red);
+      animation: flicker 2s infinite;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: .3em;
+      color: var(--red);
+      font-size: .75rem;
+      text-transform: uppercase;
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--red);
+      border-radius: 2px;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- EMBER PARTICLES -->
-<div id="embers" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+  <!-- EMBER PARTICLES -->
+  <div id="embers" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
 
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      NAV
 ═══════════════════════════════════════════ -->
-<nav class="px-6 py-3">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <!-- LOGO -->
-    <div class="flex items-center gap-3">
-      <div class="relative w-10 h-10">
-        <svg class="logo-ring absolute inset-0 w-full h-full" viewBox="0 0 40 40">
-          <circle cx="" cy="2" r="" stroke="#e31212" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-        </svg>
-        <div class="logo-inner absolute inset-0 flex items-center justify-center">
-          <span class="text-xl"></span>
+  <nav class="px-6 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- LOGO -->
+      <div class="flex items-center gap-3">
+        <div class="relative w-10 h-10">
+          <svg class="logo-ring absolute inset-0 w-full h-full" viewBox="0 0 40 40">
+            <circle cx="" cy="2" r="" stroke="#e31212" stroke-width="1.5" fill="none" stroke-dasharray="4 3" />
+          </svg>
+          <div class="logo-inner absolute inset-0 flex items-center justify-center">
+            <span class="text-xl"></span>
+          </div>
+        </div>
+        <span class="font-impact text-2xl tracking-wider text-white">IRON<span class="text-red-600">JAW</span></span>
+        <div class="flex items-center gap-3">
+          <div class="relative w-10 h-10">
+            <svg class="logo-ring absolute inset-0 w-full h-full" viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="18" stroke="#e31212" stroke-width="1.5" fill="none" stroke-dasharray="4 3" />
+            </svg>
+            <div class="logo-inner absolute inset-0 flex items-center justify-center">
+              <span class="text-xl">💪</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DESKTOP NAV -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#programs"
+            class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Programs</a>
+          <a href="#trainers"
+            class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Trainers</a>
+          <a href="#pricing"
+            class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Pricing</a>
+          <a href="#testimonials"
+            class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Reviews</a>
+        </div>
+
+        <!-- AUTH BUTTONS -->
+        <div class="hidden md:flex items-center gap-3">
+          <a href="/login/" class="btn-secondary px-6 py-2 rounded text-sm">Login</a>
+          <a href="/start_free/" class="btn-primary px-7 py-2 rounded text-sm">Start Free Trial</a>
+        </div>
+
+        <!-- HAMBURGER -->
+        <button id="hamburger" class="md:hidden text-white text-2xl">☰</button>
+      </div>
+
+      <!-- MOBILE MENU -->
+      <div id="mobile-menu" class="md:hidden mt-4 pb-4 border-t border-red-900">
+        <div class="flex flex-col gap-4 pt-4 px-2">
+          <a href="#programs" class="font-bebas text-xl text-gray-300">Programs</a>
+          <a href="#trainers" class="font-bebas text-xl text-gray-300">Trainers</a>
+          <a href="#pricing" class="font-bebas text-xl text-gray-300">Pricing</a>
+          <a href="#testimonials" class="font-bebas text-xl text-gray-300">Reviews</a>
+          <div class="flex gap-3 pt-2">
+            <button class="btn-secondary px-5 py-2 rounded text-sm flex-1">Login</button>
+            <button class="btn-primary px-5 py-2 rounded text-sm flex-1">Free Trial</button>
+          </div>
         </div>
       </div>
-      <span class="font-impact text-2xl tracking-wider text-white">IRON<span class="text-red-600">JAW</span></span>
-<div class="flex items-center gap-3">
-      <div class="relative w-10 h-10">
-        <svg class="logo-ring absolute inset-0 w-full h-full" viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="18" stroke="#e31212" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-        </svg>
-        <div class="logo-inner absolute inset-0 flex items-center justify-center">
-          <span class="text-xl">💪</span>
-        </div>
-      </div>
-    </div>
+  </nav>
 
-    <!-- DESKTOP NAV -->
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#programs" class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Programs</a>
-      <a href="#trainers" class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Trainers</a>
-      <a href="#pricing" class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Pricing</a>
-      <a href="#testimonials" class="font-bebas text-lg tracking-wider text-gray-300 hover:text-red-500 transition-colors duration-200">Reviews</a>
-    </div>
-
-    <!-- AUTH BUTTONS -->
-    <div class="hidden md:flex items-center gap-3">
-      <button class="btn-secondary px-6 py-2 rounded text-sm">Login</button>
-      <button class="btn-primary px-7 py-2 rounded text-sm">Start Free Trial</button>
-    </div>
-
-    <!-- HAMBURGER -->
-    <button id="hamburger" class="md:hidden text-white text-2xl">☰</button>
-  </div>
-
-  <!-- MOBILE MENU -->
-  <div id="mobile-menu" class="md:hidden mt-4 pb-4 border-t border-red-900">
-    <div class="flex flex-col gap-4 pt-4 px-2">
-      <a href="#programs" class="font-bebas text-xl text-gray-300">Programs</a>
-      <a href="#trainers" class="font-bebas text-xl text-gray-300">Trainers</a>
-      <a href="#pricing" class="font-bebas text-xl text-gray-300">Pricing</a>
-      <a href="#testimonials" class="font-bebas text-xl text-gray-300">Reviews</a>
-      <div class="flex gap-3 pt-2">
-        <button class="btn-secondary px-5 py-2 rounded text-sm flex-1">Login</button>
-        <button class="btn-primary px-5 py-2 rounded text-sm flex-1">Free Trial</button>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      HERO SECTION
 ═══════════════════════════════════════════ -->
-<section class="hero-bg scanlines noise relative min-h-screen flex items-center pt-20 overflow-hidden">
+  <section class="hero-bg scanlines noise relative min-h-screen flex items-center pt-20 overflow-hidden">
 
-  <!-- BLOOD DRIPS TOP -->
-  <div class="absolute top-0 left-0 right-0 flex justify-around pointer-events-none z-20">
-    <div style="width:3px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 1s forwards;height:0;opacity:0"></div>
-    <div style="width:2px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 1.5s forwards;height:0;opacity:0"></div>
-    <div style="width:3px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 2s forwards;height:0;opacity:0"></div>
-    <div style="width:2px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 2.5s forwards;height:0;opacity:0"></div>
-    <div style="width:3px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 1.2s forwards;height:0;opacity:0"></div>
-  </div>
-
-  <!-- DECORATIVE RING BG -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-10 pointer-events-none">
-    <svg viewBox="0 0 700 700" class="w-full h-full" style="animation:spin-slow 30s linear infinite">
-      <circle cx="350" cy="350" r="320" stroke="#e31212" stroke-width="1" fill="none" stroke-dasharray="8 5"/>
-      <circle cx="350" cy="350" r="280" stroke="#ff4400" stroke-width=".5" fill="none" stroke-dasharray="4 8"/>
-      <circle cx="350" cy="350" r="240" stroke="#e31212" stroke-width="1.5" fill="none" stroke-dasharray="2 10"/>
-    </svg>
-  </div>
-
-  <!-- DIAGONAL ACCENT -->
-  <div class="absolute left-0 inset-y-0 w-1 bg-red-700" style="box-shadow:0 0 20px #e31212,0 0 40px rgba(227,18,18,.3)"></div>
-
-  <div class="max-w-7xl mx-auto px-6 py-24 relative z-10 w-full">
-    <div class="max-w-3xl">
-
-      <!-- LABEL -->
-      <p class="section-label mb-4 hero-sub" style="animation-delay:.1s">⚡ Elite Fighter Training Platform</p>
-
-      <!-- HEADLINE -->
-       <div>
-      <h1 class="font-impact text-7xl md:text-9xl leading-none mb-6 hero-h1">
-        <span class="block text-white anger-text">BECOME</span>
-        <span class="block" style="color:var(--red);text-shadow:0 0 30px var(--red),0 0 60px rgba(227,18,18,.5)">
-          A FIGHTER.
-          <img src="image\Image.png" class="inline-block h-20 ml-4 align-middle" alt="Image"></span>
-      </h1>
-       </div>
-      
-      <h2 class="font-bebas text-4xl md:text-5xl text-gray-200 tracking-widest hero-sub mb-2">
-        TRAIN LIKE A <span class="hot-underline" style="color:#c9a84c">AI CHAMPION.</span>
-      </h2>
-
-      <!-- SUBHEADING -->
-      <p class="hero-sub text-lg text-gray-400 mt-6 mb-10 max-w-lg leading-relaxed font-semibold" style="animation-delay:.5s">
-        Join <span class="text-red-400 font-bold">elite boxing & fighter training programs</span> designed by professionals. Real sweat. Real grit. Real results.
-      </p>
-
-      <!-- CTA BUTTONS -->
-      <div class="hero-btns flex flex-wrap gap-4">
-        <button class="btn-primary px-10 py-4 rounded-sm text-xl tracking-wider" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
-          💪 Start Free Trial
-        </button>
-        <button class="btn-secondary px-10 py-4 rounded-sm text-xl tracking-wider" onclick="document.getElementById('video-section').scrollIntoView({behavior:'smooth'})">
-          ▶ Watch Training
-        </button>
+    <!-- BLOOD DRIPS TOP -->
+    <div class="absolute top-0 left-0 right-0 flex justify-around pointer-events-none z-20">
+      <div
+        style="width:3px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 1s forwards;height:0;opacity:0">
       </div>
+      <div
+        style="width:2px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 1.5s forwards;height:0;opacity:0">
+      </div>
+      <div
+        style="width:3px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 2s forwards;height:0;opacity:0">
+      </div>
+      <div
+        style="width:2px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 2.5s forwards;height:0;opacity:0">
+      </div>
+      <div
+        style="width:3px;background:linear-gradient(to bottom,#8b0000,#e31212);animation:blood-drip 3s ease-in 1.2s forwards;height:0;opacity:0">
+      </div>
+    </div>
 
-      <!-- STATS BAR -->
-      <div class="hero-sub mt-14 grid grid-cols-3 gap-6 border-t border-red-900 pt-8 max-w-xl" style="animation-delay:.8s">
+    <!-- DECORATIVE RING BG -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-10 pointer-events-none">
+      <svg viewBox="0 0 700 700" class="w-full h-full" style="animation:spin-slow 30s linear infinite">
+        <circle cx="350" cy="350" r="320" stroke="#e31212" stroke-width="1" fill="none" stroke-dasharray="8 5" />
+        <circle cx="350" cy="350" r="280" stroke="#ff4400" stroke-width=".5" fill="none" stroke-dasharray="4 8" />
+        <circle cx="350" cy="350" r="240" stroke="#e31212" stroke-width="1.5" fill="none" stroke-dasharray="2 10" />
+      </svg>
+    </div>
+
+    <!-- DIAGONAL ACCENT -->
+    <div class="absolute left-0 inset-y-0 w-1 bg-red-700"
+      style="box-shadow:0 0 20px #e31212,0 0 40px rgba(227,18,18,.3)"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-24 relative z-10 w-full">
+      <div class="max-w-3xl">
+
+        <!-- LABEL -->
+        <p class="section-label mb-4 hero-sub" style="animation-delay:.1s">⚡ Elite Fighter Training Platform</p>
+
+        <!-- HEADLINE -->
         <div>
-          <div class="stat-num text-4xl font-impact">500+</div>
-          <div class="text-gray-500 text-sm tracking-wider uppercase font-semibold">Fighters Trained</div>
+          <h1 class="font-impact text-7xl md:text-9xl leading-none mb-6 hero-h1">
+            <span class="block text-white anger-text">BECOME</span>
+            <span class="block" style="color:var(--red);text-shadow:0 0 30px var(--red),0 0 60px rgba(227,18,18,.5)">
+              A FIGHTER.
+              <img src="image\Image.png" class="inline-block h-20 ml-4 align-middle" alt="Image"></span>
+          </h1>
         </div>
-        <div>
-          <div class="stat-num text-4xl font-impact">12+</div>
-          <div class="text-gray-500 text-sm tracking-wider uppercase font-semibold">AI  Trainers</div>
+
+        <h2 class="font-bebas text-4xl md:text-5xl text-gray-200 tracking-widest hero-sub mb-2">
+          TRAIN LIKE A <span class="hot-underline" style="color:#c9a84c">AI CHAMPION.</span>
+        </h2>
+
+        <!-- SUBHEADING -->
+        <p class="hero-sub text-lg text-gray-400 mt-6 mb-10 max-w-lg leading-relaxed font-semibold"
+          style="animation-delay:.5s">
+          Join <span class="text-red-400 font-bold">elite boxing & fighter training programs</span> designed by
+          professionals. Real sweat. Real grit. Real results.
+        </p>
+
+        <!-- CTA BUTTONS -->
+        <div class="hero-btns flex flex-wrap gap-4">
+          <button class="btn-primary px-10 py-4 rounded-sm text-xl tracking-wider"
+            onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+            💪 Start Free Trial
+          </button>
+          <button class="btn-secondary px-10 py-4 rounded-sm text-xl tracking-wider"
+            onclick="document.getElementById('video-section').scrollIntoView({behavior:'smooth'})">
+            ▶ Watch Training
+          </button>
         </div>
-        <div>
-          <div class="stat-num text-4xl font-impact">98%</div>
-          <div class="text-gray-500 text-sm tracking-wider uppercase font-semibold">Satisfaction</div>
+
+        <!-- STATS BAR -->
+        <div class="hero-sub mt-14 grid grid-cols-3 gap-6 border-t border-red-900 pt-8 max-w-xl"
+          style="animation-delay:.8s">
+          <div>
+            <div class="stat-num text-4xl font-impact">500+</div>
+            <div class="text-gray-500 text-sm tracking-wider uppercase font-semibold">Fighters Trained</div>
+          </div>
+          <div>
+            <div class="stat-num text-4xl font-impact">12+</div>
+            <div class="text-gray-500 text-sm tracking-wider uppercase font-semibold">AI Trainers</div>
+          </div>
+          <div>
+            <div class="stat-num text-4xl font-impact">98%</div>
+            <div class="text-gray-500 text-sm tracking-wider uppercase font-semibold">Satisfaction</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- SCROLL INDICATOR -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
-    <div class="text-xs font-bebas tracking-widest text-gray-400">SCROLL DOWN</div>
-    <div class="w-px h-16 bg-gradient-to-b from-red-600 to-transparent" style="animation:blood-drip 2s infinite"></div>
-  </div>
-</section>
+    <!-- SCROLL INDICATOR -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+      <div class="text-xs font-bebas tracking-widest text-gray-400">SCROLL DOWN</div>
+      <div class="w-px h-16 bg-gradient-to-b from-red-600 to-transparent" style="animation:blood-drip 2s infinite">
+      </div>
+    </div>
+  </section>
 
-<!-- FIRE LINE DIVIDER -->
-<div class="fire-line"></div>
+  <!-- FIRE LINE DIVIDER -->
+  <div class="fire-line"></div>
 
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      VIDEO SECTION
 ═══════════════════════════════════════════ -->
-<section id="video-section" class="relative py-0 overflow-hidden bg-black">
-  <div class="relative w-full" style="min-height:500px">
+  <section id="video-section" class="relative py-0 overflow-hidden bg-black">
+    <div class="relative w-full" style="min-height:500px">
 
-    <!-- VIDEO EMBED (autoplay muted loop) -->
-    <div class="relative overflow-hidden" style="padding-top:56.25%">
-      <iframe
-        class="absolute inset-0 w-full h-full"
-        src="https://www.youtube.com/embed/C4UjqCHRi60?autoplay=1&mute=1&loop=1&playlist=C4UjqCHRi60&controls=0&modestbranding=1&showinfo=0"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-      </iframe>
-      <!-- DARK OVERLAY -->
-      <div class="video-overlay absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div class="text-center px-4">
-          <p class="section-label mb-4 reveal">🔥 The Training Ground</p>
-          <h2 class="font-impact text-5xl md:text-7xl text-white anger-text mb-4">AI BASED TRAINING.<br><span style="color:var(--red)">REAL RESULTS.</span></h2>
-          <p class="font-bebas text-2xl text-gray-300 tracking-widest reveal">No excuses. No shortcuts. Just pure fighter mentality.</p>
+      <!-- VIDEO EMBED (autoplay muted loop) -->
+      <div class="relative overflow-hidden" style="padding-top:56.25%">
+        <iframe class="absolute inset-0 w-full h-full"
+          src="https://www.youtube.com/embed/C4UjqCHRi60?autoplay=1&mute=1&loop=1&playlist=C4UjqCHRi60&controls=0&modestbranding=1&showinfo=0"
+          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+        <!-- DARK OVERLAY -->
+        <div class="video-overlay absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="text-center px-4">
+            <p class="section-label mb-4 reveal">🔥 The Training Ground</p>
+            <h2 class="font-impact text-5xl md:text-7xl text-white anger-text mb-4">AI BASED TRAINING.<br><span
+                style="color:var(--red)">REAL RESULTS.</span></h2>
+            <p class="font-bebas text-2xl text-gray-300 tracking-widest reveal">No excuses. No shortcuts. Just pure
+              fighter mentality.</p>
+          </div>
         </div>
       </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
+  <div class="fire-line"></div>
 
-<div class="fire-line"></div>
-
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      FEATURES SECTION
 ═══════════════════════════════════════════ -->
-<section id="programs" class="py-24 bg-gradient-to-b from-black via-zinc-950 to-black relative">
-  <div class="absolute inset-0 opacity-5 pointer-events-none" style="background:repeating-linear-gradient(45deg,#e31212 0px,#e31212 1px,transparent 1px,transparent 60px)"></div>
-
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16">
-      <p class="section-label mb-3 reveal">What You Get</p>
-      <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
-        ELITE <span style="color:var(--red)">PROGRAMS</span>
-      </h2>
-      <p class="text-gray-400 mt-4 max-w-xl mx-auto reveal">Every tool, technique, and training plan you need to go from zero to fighter.</p>
+  <section id="programs" class="py-24 bg-gradient-to-b from-black via-zinc-950 to-black relative">
+    <div class="absolute inset-0 opacity-5 pointer-events-none"
+      style="background:repeating-linear-gradient(45deg,#e31212 0px,#e31212 1px,transparent 1px,transparent 60px)">
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- CARD 1 -->
-      <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.1s">
-        <div class="text-5xl mb-5">💪</div>
-        <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Professional AI Fighter Training</h3>
-        <p class="text-gray-400 leading-relaxed">World-class boxing & MMA fundamentals taught by real pro fighters. Footwork, combos, defense — all covered.</p>
-        <div class="mt-6 fire-line"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3 reveal">What You Get</p>
+        <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
+          ELITE <span style="color:var(--red)">PROGRAMS</span>
+        </h2>
+        <p class="text-gray-400 mt-4 max-w-xl mx-auto reveal">Every tool, technique, and training plan you need to go
+          from zero to fighter.</p>
       </div>
 
-      <!-- CARD 2 -->
-      <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.2s">
-        <div class="text-5xl mb-5">📹</div>
-        <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Video-Based Lessons</h3>
-        <p class="text-gray-400 leading-relaxed">HD slow-motion breakdowns of every technique. Watch, pause, repeat — learn at your own pace from anywhere.</p>
-        <div class="mt-6 fire-line"></div>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <!-- CARD 3 -->
-      <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.3s">
-        <div class="text-5xl mb-5">🧠</div>
-        <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Personalized Training Plans</h3>
-        <p class="text-gray-400 leading-relaxed">AI-powered custom plans based on your level, goals, and schedule. Your fight camp. Your rules.</p>
-        <div class="mt-6 fire-line"></div>
-      </div>
+        <!-- CARD 1 -->
+        <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.1s">
+          <div class="text-5xl mb-5">💪</div>
+          <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Professional AI Fighter Training</h3>
+          <p class="text-gray-400 leading-relaxed">World-class boxing & MMA fundamentals taught by real pro fighters.
+            Footwork, combos, defense — all covered.</p>
+          <div class="mt-6 fire-line"></div>
+        </div>
 
-      <!-- CARD 4 -->
-      <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.4s">
-        <div class="text-5xl mb-5">🔥</div>
-        <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Strength & Conditioning</h3>
-        <p class="text-gray-400 leading-relaxed">Fighter-grade S&C programming. Build explosive power, endurance, and iron-cage toughness.</p>
-        <div class="mt-6 fire-line"></div>
-      </div>
+        <!-- CARD 2 -->
+        <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.2s">
+          <div class="text-5xl mb-5">📹</div>
+          <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Video-Based Lessons</h3>
+          <p class="text-gray-400 leading-relaxed">HD slow-motion breakdowns of every technique. Watch, pause, repeat —
+            learn at your own pace from anywhere.</p>
+          <div class="mt-6 fire-line"></div>
+        </div>
 
-      <!-- CARD 5 -->
-      <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.5s">
-        <div class="text-5xl mb-5">🥇</div>
-        <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">AI Fighter Techniques</h3>
-        <p class="text-gray-400 leading-relaxed">Jabs, hooks, uppercuts, clinch work, takedown defense — exact techniques used in professional bouts.</p>
-        <div class="mt-6 fire-line"></div>
-      </div>
+        <!-- CARD 3 -->
+        <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.3s">
+          <div class="text-5xl mb-5">🧠</div>
+          <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Personalized Training Plans</h3>
+          <p class="text-gray-400 leading-relaxed">AI-powered custom plans based on your level, goals, and schedule.
+            Your fight camp. Your rules.</p>
+          <div class="mt-6 fire-line"></div>
+        </div>
 
-      <!-- CARD 6 -->
-      <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.6s">
-        <div class="text-5xl mb-5">🛡️</div>
-        <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Live Sparring Sessions</h3>
-        <p class="text-gray-400 leading-relaxed">Scheduled live virtual sparring sessions with trainers and community members. Put your skills to the test.</p>
-        <div class="mt-6 fire-line"></div>
-      </div>
+        <!-- CARD 4 -->
+        <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.4s">
+          <div class="text-5xl mb-5">🔥</div>
+          <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Strength & Conditioning</h3>
+          <p class="text-gray-400 leading-relaxed">Fighter-grade S&C programming. Build explosive power, endurance, and
+            iron-cage toughness.</p>
+          <div class="mt-6 fire-line"></div>
+        </div>
 
+        <!-- CARD 5 -->
+        <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.5s">
+          <div class="text-5xl mb-5">🥇</div>
+          <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">AI Fighter Techniques</h3>
+          <p class="text-gray-400 leading-relaxed">Jabs, hooks, uppercuts, clinch work, takedown defense — exact
+            techniques used in professional bouts.</p>
+          <div class="mt-6 fire-line"></div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="feature-card rounded-lg p-8 reveal" style="transition-delay:.6s">
+          <div class="text-5xl mb-5">🛡️</div>
+          <h3 class="font-bebas text-2xl text-white tracking-wider mb-3">Live Sparring Sessions</h3>
+          <p class="text-gray-400 leading-relaxed">Scheduled live virtual sparring sessions with trainers and community
+            members. Put your skills to the test.</p>
+          <div class="mt-6 fire-line"></div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider-fire"></div>
+  <div class="divider-fire"></div>
 
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      PRICING SECTION
 ═══════════════════════════════════════════ -->
-<section id="pricing" class="py-24 bg-black relative overflow-hidden">
+  <section id="pricing" class="py-24 bg-black relative overflow-hidden">
 
-  <!-- BG EFFECT -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10" style="background:radial-gradient(circle,#8b0000 0%,transparent 70%)"></div>
-  </div>
-
-  <div class="max-w-6xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16">
-      <p class="section-label mb-3 reveal">Zero Risk Entry</p>
-      <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
-        SIMPLE <span style="color:var(--red)">PRICING</span>
-      </h2>
-      <p class="text-gray-400 mt-4 reveal">Start for free. Upgrade when you're ready to go all-in.</p>
+    <!-- BG EFFECT -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10"
+        style="background:radial-gradient(circle,#8b0000 0%,transparent 70%)"></div>
     </div>
 
-    <!-- FREE TRIAL BADGE -->
-    <div class="text-center mb-10 reveal">
-      <div class="inline-block badge-float bg-gradient-to-r from-red-900 to-red-700 border border-red-500 rounded-full px-8 py-3">
-        <span class="font-bebas text-xl tracking-widest text-white">✅ FIRST SESSION 100% FREE — NO CREDIT CARD NEEDED</span>
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3 reveal">Zero Risk Entry</p>
+        <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
+          SIMPLE <span style="color:var(--red)">PRICING</span>
+        </h2>
+        <p class="text-gray-400 mt-4 reveal">Start for free. Upgrade when you're ready to go all-in.</p>
+      </div>
+
+      <!-- FREE TRIAL BADGE -->
+      <div class="text-center mb-10 reveal">
+        <div
+          class="inline-block badge-float bg-gradient-to-r from-red-900 to-red-700 border border-red-500 rounded-full px-8 py-3">
+          <span class="font-bebas text-xl tracking-widest text-white">✅ FIRST SESSION 100% FREE — NO CREDIT CARD
+            NEEDED</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+
+        <!-- FREE TRIAL -->
+        <div class="pricing-card rounded-lg p-8 reveal flex flex-col" style="transition-delay:.1s">
+          <div class="mb-6">
+            <div class="font-bebas text-xl tracking-widest text-gray-400 mb-2">Free Trial</div>
+            <div class="font-impact text-6xl text-white">₹0</div>
+            <div class="text-gray-500 text-sm mt-1">One session, zero cost</div>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-center gap-3 text-gray-300"><span class="text-green-500">✓</span> 1 Full Training
+              Session</li>
+            <li class="flex items-center gap-3 text-gray-300"><span class="text-green-500">✓</span> Access to Intro
+              Videos</li>
+            <li class="flex items-center gap-3 text-gray-300"><span class="text-green-500">✓</span> Community Access
+            </li>
+            <li class="flex items-center gap-3 text-gray-400 line-through"><span class="text-red-800">✗</span>
+              Personalized Plans</li>
+            <li class="flex items-center gap-3 text-gray-400 line-through"><span class="text-red-800">✗</span> Trainer
+              Feedback</li>
+          </ul>
+          <button class="btn-secondary w-full py-3 rounded text-lg">Try Free Now</button>
+          <p class="text-xs text-gray-600 text-center mt-3">⚠️ Payment required after trial</p>
+        </div>
+
+        <!-- MONTHLY — FEATURED -->
+        <div class="pricing-card featured rounded-lg p-8 reveal flex flex-col relative" style="transition-delay:.2s">
+          <div
+            class="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-700 text-white font-bebas text-sm tracking-widest px-6 py-1 rounded-full">
+            🔥 MOST POPULAR
+          </div>
+          <div class="mb-6">
+            <div class="font-bebas text-xl tracking-widest text-red-400 mb-2">Monthly Plan</div>
+            <div class="font-impact text-6xl" style="color:var(--red)">₹999</div>
+            <div class="text-gray-500 text-sm mt-1">per month, cancel anytime</div>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Unlimited Training
+              Sessions</li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Full Video Library
+            </li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Personalized Plans
+            </li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Trainer Feedback
+            </li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Live Sparring
+              Sessions</li>
+          </ul>
+          <button class="btn-primary w-full py-3 rounded text-lg">Claim Free Trial</button>
+        </div>
+
+        <!-- ANNUAL -->
+        <div class="pricing-card rounded-lg p-8 reveal flex flex-col" style="transition-delay:.3s">
+          <div class="mb-6">
+            <div class="font-bebas text-xl tracking-widest text-gray-400 mb-2">Annual Plan</div>
+            <div class="font-impact text-6xl text-white">₹7,999</div>
+            <div class="text-gray-500 text-sm mt-1">per year · Save ₹3,989</div>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Everything in
+              Monthly</li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> 1-on-1 Trainer
+              Sessions</li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Nutrition Planning
+            </li>
+            <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Official IRONJAW
+              Badge</li>
+            <li class="flex items-center gap-3 text-yellow-400"><span class="text-yellow-400">★</span> Priority Support
+            </li>
+          </ul>
+          <button class="btn-secondary w-full py-3 rounded text-lg">Go Annual</button>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+  <div class="divider-fire"></div>
 
-      <!-- FREE TRIAL -->
-      <div class="pricing-card rounded-lg p-8 reveal flex flex-col" style="transition-delay:.1s">
-        <div class="mb-6">
-          <div class="font-bebas text-xl tracking-widest text-gray-400 mb-2">Free Trial</div>
-          <div class="font-impact text-6xl text-white">₹0</div>
-          <div class="text-gray-500 text-sm mt-1">One session, zero cost</div>
-        </div>
-        <ul class="space-y-3 mb-8 flex-1">
-          <li class="flex items-center gap-3 text-gray-300"><span class="text-green-500">✓</span> 1 Full Training Session</li>
-          <li class="flex items-center gap-3 text-gray-300"><span class="text-green-500">✓</span> Access to Intro Videos</li>
-          <li class="flex items-center gap-3 text-gray-300"><span class="text-green-500">✓</span> Community Access</li>
-          <li class="flex items-center gap-3 text-gray-400 line-through"><span class="text-red-800">✗</span> Personalized Plans</li>
-          <li class="flex items-center gap-3 text-gray-400 line-through"><span class="text-red-800">✗</span> Trainer Feedback</li>
-        </ul>
-        <button class="btn-secondary w-full py-3 rounded text-lg">Try Free Now</button>
-        <p class="text-xs text-gray-600 text-center mt-3">⚠️ Payment required after trial</p>
-      </div>
-
-      <!-- MONTHLY — FEATURED -->
-      <div class="pricing-card featured rounded-lg p-8 reveal flex flex-col relative" style="transition-delay:.2s">
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-700 text-white font-bebas text-sm tracking-widest px-6 py-1 rounded-full">
-          🔥 MOST POPULAR
-        </div>
-        <div class="mb-6">
-          <div class="font-bebas text-xl tracking-widest text-red-400 mb-2">Monthly Plan</div>
-          <div class="font-impact text-6xl" style="color:var(--red)">₹999</div>
-          <div class="text-gray-500 text-sm mt-1">per month, cancel anytime</div>
-        </div>
-        <ul class="space-y-3 mb-8 flex-1">
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Unlimited Training Sessions</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Full Video Library</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Personalized Plans</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Trainer Feedback</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Live Sparring Sessions</li>
-        </ul>
-        <button class="btn-primary w-full py-3 rounded text-lg">Claim Free Trial</button>
-      </div>
-
-      <!-- ANNUAL -->
-      <div class="pricing-card rounded-lg p-8 reveal flex flex-col" style="transition-delay:.3s">
-        <div class="mb-6">
-          <div class="font-bebas text-xl tracking-widest text-gray-400 mb-2">Annual Plan</div>
-          <div class="font-impact text-6xl text-white">₹7,999</div>
-          <div class="text-gray-500 text-sm mt-1">per year · Save ₹3,989</div>
-        </div>
-        <ul class="space-y-3 mb-8 flex-1">
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Everything in Monthly</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> 1-on-1 Trainer Sessions</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Nutrition Planning</li>
-          <li class="flex items-center gap-3 text-gray-200"><span class="text-green-400">✓</span> Official IRONJAW Badge</li>
-          <li class="flex items-center gap-3 text-yellow-400"><span class="text-yellow-400">★</span> Priority Support</li>
-        </ul>
-        <button class="btn-secondary w-full py-3 rounded text-lg">Go Annual</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider-fire"></div>
-
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      TRAINERS SECTION
 ═══════════════════════════════════════════ -->
-<section id="trainers" class="py-24 bg-gradient-to-b from-black to-zinc-950">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <p class="section-label mb-3 reveal">Meet Your Coaches</p>
-      <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
-        THE <span style="color:var(--red)">CORNERMEN</span>
-      </h2>
-      <p class="text-gray-400 mt-4 reveal">Fighters who've been in the ring — now in your corner.</p>
+  <section id="trainers" class="py-24 bg-gradient-to-b from-black to-zinc-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3 reveal">Meet Your Coaches</p>
+        <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
+          THE <span style="color:var(--red)">CORNERMEN</span>
+        </h2>
+        <p class="text-gray-400 mt-4 reveal">Fighters who've been in the ring — now in your corner.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- TRAINER CARDS (using unsplash portraits) -->
+        <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.1s">
+          <div class="relative h-72">
+            <img src="https://images.unsplash.com/photo-1614628808870-19b1fc4f22d6?w=400&q=80" alt="Trainer"
+              class="w-full h-full object-cover" />
+            <div class="overlay"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+              <div class="font-bebas text-xl tracking-wider text-white">ARJUN SINGH</div>
+              <div class="text-red-400 text-sm font-semibold">Boxing · 15 Years Exp.</div>
+              <div class="text-gray-400 text-xs mt-1">Specialty: Orthodox Stance & Power Punching</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.2s">
+          <div class="relative h-72">
+            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&q=80" alt="Trainer"
+              class="w-full h-full object-cover" />
+            <div class="overlay"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+              <div class="font-bebas text-xl tracking-wider text-white">RAHUL VERMA</div>
+              <div class="text-red-400 text-sm font-semibold">MMA · 10 Years Exp.</div>
+              <div class="text-gray-400 text-xs mt-1">Specialty: Ground & Pound, Clinch Work</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.3s">
+          <div class="relative h-72">
+            <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400&q=80" alt="Trainer"
+              class="w-full h-full object-cover" />
+            <div class="overlay"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+              <div class="font-bebas text-xl tracking-wider text-white">PRIYA NAIR</div>
+              <div class="text-red-400 text-sm font-semibold">Fitness · 8 Years Exp.</div>
+              <div class="text-gray-400 text-xs mt-1">Specialty: S&C, Explosive Power, Agility</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.4s">
+          <div class="relative h-72">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Trainer"
+              class="w-full h-full object-cover" />
+            <div class="overlay"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+              <div class="font-bebas text-xl tracking-wider text-white">VIKRAM RATHOD</div>
+              <div class="text-red-400 text-sm font-semibold">Kickboxing · 12 Years Exp.</div>
+              <div class="text-gray-400 text-xs mt-1">Specialty: Muay Thai, Devastating Kicks</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div class="fire-line"></div>
 
-      <!-- TRAINER CARDS (using unsplash portraits) -->
-      <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.1s">
-        <div class="relative h-72">
-          <img src="https://images.unsplash.com/photo-1614628808870-19b1fc4f22d6?w=400&q=80" alt="Trainer" class="w-full h-full object-cover"/>
-          <div class="overlay"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
-            <div class="font-bebas text-xl tracking-wider text-white">ARJUN SINGH</div>
-            <div class="text-red-400 text-sm font-semibold">Boxing · 15 Years Exp.</div>
-            <div class="text-gray-400 text-xs mt-1">Specialty: Orthodox Stance & Power Punching</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.2s">
-        <div class="relative h-72">
-          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&q=80" alt="Trainer" class="w-full h-full object-cover"/>
-          <div class="overlay"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
-            <div class="font-bebas text-xl tracking-wider text-white">RAHUL VERMA</div>
-            <div class="text-red-400 text-sm font-semibold">MMA · 10 Years Exp.</div>
-            <div class="text-gray-400 text-xs mt-1">Specialty: Ground & Pound, Clinch Work</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.3s">
-        <div class="relative h-72">
-          <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400&q=80" alt="Trainer" class="w-full h-full object-cover"/>
-          <div class="overlay"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
-            <div class="font-bebas text-xl tracking-wider text-white">PRIYA NAIR</div>
-            <div class="text-red-400 text-sm font-semibold">Fitness · 8 Years Exp.</div>
-            <div class="text-gray-400 text-xs mt-1">Specialty: S&C, Explosive Power, Agility</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="trainer-card rounded-lg overflow-hidden reveal" style="transition-delay:.4s">
-        <div class="relative h-72">
-          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Trainer" class="w-full h-full object-cover"/>
-          <div class="overlay"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
-            <div class="font-bebas text-xl tracking-wider text-white">VIKRAM RATHOD</div>
-            <div class="text-red-400 text-sm font-semibold">Kickboxing · 12 Years Exp.</div>
-            <div class="text-gray-400 text-xs mt-1">Specialty: Muay Thai, Devastating Kicks</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="fire-line"></div>
-
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      TESTIMONIALS
 ═══════════════════════════════════════════ -->
-<section id="testimonials" class="py-24 bg-black relative overflow-hidden">
+  <section id="testimonials" class="py-24 bg-black relative overflow-hidden">
 
-  <div class="absolute inset-0 opacity-5 pointer-events-none" style="background:repeating-linear-gradient(135deg,#e31212 0px,#e31212 1px,transparent 1px,transparent 80px)"></div>
-
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16">
-      <p class="section-label mb-3 reveal">From The Gym Floor</p>
-      <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
-        FIGHTER <span style="color:var(--red)">VOICES</span>
-      </h2>
+    <div class="absolute inset-0 opacity-5 pointer-events-none"
+      style="background:repeating-linear-gradient(135deg,#e31212 0px,#e31212 1px,transparent 1px,transparent 80px)">
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-      <div class="testi-card rounded-lg p-8 pt-12 reveal" style="transition-delay:.1s">
-        <p class="text-gray-300 leading-relaxed mb-6 italic">"This training changed my fitness completely. In 8 weeks I dropped 12kg and can throw combos I never thought possible. IRONJAW is the real deal."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bebas text-xl text-red-300">R</div>
-          <div>
-            <div class="font-bebas text-white tracking-wider">Rohit M.</div>
-            <div class="text-gray-500 text-xs">Mumbai · 3 months</div>
-          </div>
-          <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
-        </div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3 reveal">From The Gym Floor</p>
+        <h2 class="font-impact text-5xl md:text-7xl text-white reveal">
+          FIGHTER <span style="color:var(--red)">VOICES</span>
+        </h2>
       </div>
 
-      <div class="testi-card rounded-lg p-8 pt-12 reveal" style="transition-delay:.2s">
-        <p class="text-gray-300 leading-relaxed mb-6 italic">"Feels like real fight camp training — the intensity, the structure, the feedback. I've trained in gyms across India and this online platform beats most of them."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bebas text-xl text-red-300">S</div>
-          <div>
-            <div class="font-bebas text-white tracking-wider">Sneha K.</div>
-            <div class="text-gray-500 text-xs">Delhi · 5 months</div>
-          </div>
-          <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
-        </div>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-      <div class="testi-card rounded-lg p-8 pt-12 reveal" style="transition-delay:.3s">
-        <p class="text-gray-300 leading-relaxed mb-6 italic">"I signed up for the free trial thinking 'it's free, can't be that good.' I was WRONG. Now I'm on the annual plan and training every day. Best investment ever."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bebas text-xl text-red-300">A</div>
-          <div>
-            <div class="font-bebas text-white tracking-wider">Aman D.</div>
-            <div class="text-gray-500 text-xs">Pune · 7 months</div>
+        <div class="testi-card rounded-lg p-8 pt-12 reveal" style="transition-delay:.1s">
+          <p class="text-gray-300 leading-relaxed mb-6 italic">"This training changed my fitness completely. In 8 weeks
+            I dropped 12kg and can throw combos I never thought possible. IRONJAW is the real deal."</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bebas text-xl text-red-300">
+              R</div>
+            <div>
+              <div class="font-bebas text-white tracking-wider">Rohit M.</div>
+              <div class="text-gray-500 text-xs">Mumbai · 3 months</div>
+            </div>
+            <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
           </div>
-          <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
         </div>
-      </div>
 
+        <div class="testi-card rounded-lg p-8 pt-12 reveal" style="transition-delay:.2s">
+          <p class="text-gray-300 leading-relaxed mb-6 italic">"Feels like real fight camp training — the intensity, the
+            structure, the feedback. I've trained in gyms across India and this online platform beats most of them."</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bebas text-xl text-red-300">
+              S</div>
+            <div>
+              <div class="font-bebas text-white tracking-wider">Sneha K.</div>
+              <div class="text-gray-500 text-xs">Delhi · 5 months</div>
+            </div>
+            <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="testi-card rounded-lg p-8 pt-12 reveal" style="transition-delay:.3s">
+          <p class="text-gray-300 leading-relaxed mb-6 italic">"I signed up for the free trial thinking 'it's free,
+            can't be that good.' I was WRONG. Now I'm on the annual plan and training every day. Best investment ever."
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center font-bebas text-xl text-red-300">
+              A</div>
+            <div>
+              <div class="font-bebas text-white tracking-wider">Aman D.</div>
+              <div class="text-gray-500 text-xs">Pune · 7 months</div>
+            </div>
+            <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider-fire"></div>
+  <div class="divider-fire"></div>
 
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      FINAL CTA
 ═══════════════════════════════════════════ -->
-<section class="py-32 relative overflow-hidden" style="background:linear-gradient(135deg,#0a0000 0%,#1a0000 40%,#0a0000 100%)">
+  <section class="py-32 relative overflow-hidden"
+    style="background:linear-gradient(135deg,#0a0000 0%,#1a0000 40%,#0a0000 100%)">
 
-  <!-- MASSIVE BG TEXT -->
-  <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-    <div class="font-impact text-[20vw] text-red-900 opacity-5 select-none whitespace-nowrap">FIGHT</div>
-  </div>
-
-  <!-- CORNER ACCENTS -->
-  <div class="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-red-700 opacity-40"></div>
-  <div class="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-red-700 opacity-40"></div>
-  <div class="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-red-700 opacity-40"></div>
-  <div class="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-red-700 opacity-40"></div>
-
-  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-    <p class="section-label mb-4 reveal">The Clock Is Ticking</p>
-    <h2 class="font-impact text-6xl md:text-8xl text-white anger-text mb-6 reveal">
-      START YOUR<br>
-      <span style="color:var(--red)">FIGHTING</span><br>
-      JOURNEY TODAY
-    </h2>
-    <p class="text-gray-400 text-lg mb-10 reveal max-w-lg mx-auto">
-      Every champion started somewhere. Your somewhere is right here, right now. First session is FREE.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
-      <button class="btn-primary px-14 py-5 rounded text-2xl tracking-widest" style="animation:border-burn 2s ease-in-out infinite,pulse-glow 2s ease-in-out infinite">
-        💪 CLAIM FREE TRIAL
-      </button>
+    <!-- MASSIVE BG TEXT -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+      <div class="font-impact text-[20vw] text-red-900 opacity-5 select-none whitespace-nowrap">FIGHT</div>
     </div>
-    <p class="text-gray-600 text-xs mt-6 reveal">No credit card required · Cancel anytime · Real results guaranteed</p>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════════════
+    <!-- CORNER ACCENTS -->
+    <div class="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-red-700 opacity-40"></div>
+    <div class="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-red-700 opacity-40"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-red-700 opacity-40"></div>
+    <div class="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-red-700 opacity-40"></div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <p class="section-label mb-4 reveal">The Clock Is Ticking</p>
+      <h2 class="font-impact text-6xl md:text-8xl text-white anger-text mb-6 reveal">
+        START YOUR<br>
+        <span style="color:var(--red)">FIGHTING</span><br>
+        JOURNEY TODAY
+      </h2>
+      <p class="text-gray-400 text-lg mb-10 reveal max-w-lg mx-auto">
+        Every champion started somewhere. Your somewhere is right here, right now. First session is FREE.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+        <button class="btn-primary px-14 py-5 rounded text-2xl tracking-widest"
+          style="animation:border-burn 2s ease-in-out infinite,pulse-glow 2s ease-in-out infinite">
+          💪 CLAIM FREE TRIAL
+        </button>
+      </div>
+      <p class="text-gray-600 text-xs mt-6 reveal">No credit card required · Cancel anytime · Real results guaranteed
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
      FOOTER
 ═══════════════════════════════════════════ -->
-<footer class="bg-black border-t border-red-950 py-12">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <span class="text-3xl">💪</span>
-        <span class="font-impact text-2xl text-white">IRON<span class="text-red-600">JAW</span></span>
+  <footer class="bg-black border-t border-red-950 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">💪</span>
+          <span class="font-impact text-2xl text-white">IRON<span class="text-red-600">JAW</span></span>
+        </div>
+        <div class="flex gap-8 font-bebas text-gray-500 tracking-wider">
+          <a href="#" class="hover:text-red-500 transition-colors">Privacy</a>
+          <a href="#" class="hover:text-red-500 transition-colors">Terms</a>
+          <a href="#" class="hover:text-red-500 transition-colors">Contact</a>
+          <a href="#" class="hover:text-red-500 transition-colors">Instagram</a>
+        </div>
+        <p class="text-gray-700 text-sm">© 2025 IRONJAW. All rights reserved.</p>
       </div>
-      <div class="flex gap-8 font-bebas text-gray-500 tracking-wider">
-        <a href="#" class="hover:text-red-500 transition-colors">Privacy</a>
-        <a href="#" class="hover:text-red-500 transition-colors">Terms</a>
-        <a href="#" class="hover:text-red-500 transition-colors">Contact</a>
-        <a href="#" class="hover:text-red-500 transition-colors">Instagram</a>
-      </div>
-      <p class="text-gray-700 text-sm">© 2025 IRONJAW. All rights reserved.</p>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- ═══════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════════════════ -->
-<script>
-// ── EMBER PARTICLES ──────────────────────────
-const emberContainer = document.getElementById('embers');
-function spawnEmber() {
-  const e = document.createElement('div');
-  e.className = 'ember';
-  const size = Math.random() * 6 + 2;
-  e.style.cssText = `
+  <script>
+    // ── EMBER PARTICLES ──────────────────────────
+    const emberContainer = document.getElementById('embers');
+    function spawnEmber() {
+      const e = document.createElement('div');
+      e.className = 'ember';
+      const size = Math.random() * 6 + 2;
+      e.style.cssText = `
     width:${size}px;height:${size}px;
-    left:${Math.random()*100}%;
-    bottom:${Math.random()*20}%;
-    animation-duration:${Math.random()*6+4}s;
-    animation-delay:${Math.random()*3}s;
-    opacity:${Math.random()*.7+.3};
-    filter:blur(${Math.random()*1.5}px);
+    left:${Math.random() * 100}%;
+    bottom:${Math.random() * 20}%;
+    animation-duration:${Math.random() * 6 + 4}s;
+    animation-delay:${Math.random() * 3}s;
+    opacity:${Math.random() * .7 + .3};
+    filter:blur(${Math.random() * 1.5}px);
   `;
-  emberContainer.appendChild(e);
-  setTimeout(()=>e.remove(), 10000);
-}
-setInterval(spawnEmber, 400);
-for(let i=0;i<8;i++) setTimeout(spawnEmber, i*200);
-
-// ── SCROLL REVEAL ──────────────────────────
-const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
-const revealObs = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
+      emberContainer.appendChild(e);
+      setTimeout(() => e.remove(), 10000);
     }
-  });
-},{threshold:0.12});
-revealEls.forEach(el=>revealObs.observe(el));
+    setInterval(spawnEmber, 400);
+    for (let i = 0; i < 8; i++) setTimeout(spawnEmber, i * 200);
 
-// ── MOBILE MENU ──────────────────────────
-document.getElementById('hamburger').addEventListener('click',()=>{
-  document.getElementById('mobile-menu').classList.toggle('open');
-});
+    // ── SCROLL REVEAL ──────────────────────────
+    const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
 
-// ── SMOOTH SCROLL CLOSE MENU ──────────────────────────
-document.querySelectorAll('#mobile-menu a').forEach(a=>{
-  a.addEventListener('click',()=>{
-    document.getElementById('mobile-menu').classList.remove('open');
-  });
-});
+    // ── MOBILE MENU ──────────────────────────
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    });
 
-// ── COUNTER ANIMATION ──────────────────────────
-function animateCounter(el, target, suffix='') {
-  let current = 0;
-  const step = target / 60;
-  const interval = setInterval(()=>{
-    current = Math.min(current + step, target);
-    el.textContent = Math.floor(current) + suffix;
-    if(current >= target) clearInterval(interval);
-  },25);
-}
+    // ── SMOOTH SCROLL CLOSE MENU ──────────────────────────
+    document.querySelectorAll('#mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.remove('open');
+      });
+    });
 
-// ── NAV SHRINK ON SCROLL ──────────────────────────
-window.addEventListener('scroll',()=>{
-  const nav = document.querySelector('nav');
-  if(window.scrollY > 80){
-    nav.style.padding = '8px 0';
-  } else {
-    nav.style.padding = '';
-  }
-});
+    // ── COUNTER ANIMATION ──────────────────────────
+    function animateCounter(el, target, suffix = '') {
+      let current = 0;
+      const step = target / 60;
+      const interval = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + suffix;
+        if (current >= target) clearInterval(interval);
+      }, 25);
+    }
 
-// ── GLITCH HOVER ──────────────────────────
-document.querySelectorAll('.btn-primary').forEach(btn=>{
-  btn.addEventListener('mouseenter',()=>{
-    btn.style.animation = 'shake .2s ease';
-    setTimeout(()=>btn.style.animation='',200);
-  });
-});
-</script>
+    // ── NAV SHRINK ON SCROLL ──────────────────────────
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 80) {
+        nav.style.padding = '8px 0';
+      } else {
+        nav.style.padding = '';
+      }
+    });
+
+    // ── GLITCH HOVER ──────────────────────────
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.animation = 'shake .2s ease';
+        setTimeout(() => btn.style.animation = '', 200);
+      });
+    });
+  </script>
 </body>
+
 </html>
