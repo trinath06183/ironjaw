@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-top: 100px; position: relative;">
+    <!-- Abstract background -->
+    <div class="hero-bg-img" style="position:absolute; inset:0; background:radial-gradient(circle, var(--glass-bd) 0%, transparent 60%); opacity:0.3;"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    
+    <div class="container" style="position: relative; z-index: 10; width: 100%;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h1 class="section-title" style="font-size: 2.5rem;"><span style="color: var(--red);">Fighter</span> Roadmap</h1>
+        <p class="section-sub">Follow the ultimate training path to become a champion.</p>
+      </div>
+      
+      <!-- Custom CSS injected for the roadmap flow -->
+      <style>
+        .roadmap-wrapper {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          max-width: 1000px;
+          margin: 0 auto;
+          gap: 40px;
+          padding: 20px 0 80px 0;
+        }
+        .roadmap-center-bar {
+          position: absolute;
+          top: 0; bottom: 80px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          background: var(--red);
+          border-radius: 6px;
+          box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+          z-index: 1;
+        }
+        .rm-node {
+          position: relative;
+          display: flex;
+          width: 100%;
+          z-index: 2;
+        }
+        .rm-node.right { justify-content: flex-end; }
+        .rm-node.left { justify-content: flex-start; }
+
+        .rm-card {
+          width: 42%;
+          border-radius: 16px;
+          padding: 24px;
+          border: 1px solid var(--glass-bd);
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .rm-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+          border-color: var(--red);
+        }
+
+        .rm-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 4px;
+          background: var(--red);
+          z-index: 1;
+        }
+
+        /* Right side arrow */
+        .rm-node.right .rm-arrow {
+          left: 50%;
+          right: 42%;
+          width: auto;
+        }
+        .rm-node.right .rm-arrow::after {
+          content: '';
+          position: absolute;
+          right: -2px;
+          top: -7px;
+          border-top: 9px solid transparent;
+          border-bottom: 9px solid transparent;
+          border-left: 14px solid var(--red);
+        }
+
+        /* Left side arrow */
+        .rm-node.left .rm-arrow {
+          right: 50%;
+          left: 42%;
+          width: auto;
+        }
+        .rm-node.left .rm-arrow::before {
+          content: '';
+          position: absolute;
+          left: -2px;
+          top: -7px;
+          border-top: 9px solid transparent;
+          border-bottom: 9px solid transparent;
+          border-right: 14px solid var(--red);
+        }
+
+        .rm-step {
+          display: inline-block;
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: var(--red);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 8px;
+        }
+        .rm-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: var(--card-title);
+          margin-bottom: 10px;
+        }
+        .rm-desc {
+          font-size: 0.9rem;
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
+
+        /* Responsive override */
+        @media(max-width: 768px) {
+          .roadmap-center-bar {
+            left: 24px;
+            transform: none;
+          }
+          .rm-node.left, .rm-node.right {
+            justify-content: flex-end;
+          }
+          .rm-card {
+            width: calc(100% - 64px);
+          }
+          .rm-node.left .rm-arrow, .rm-node.right .rm-arrow {
+            left: 27px;
+            right: auto;
+            width: 37px;
+          }
+          .rm-node.left .rm-arrow::before {
+            display: none;
+          }
+          .rm-node.left .rm-arrow::after, .rm-node.right .rm-arrow::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            left: auto;
+            top: -7px;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-right: none;
+            border-left: 14px solid var(--red);
+          }
+        }
+      </style>
+
+      <div class="roadmap-wrapper">
+        <div class="roadmap-center-bar"></div>
+        
+        <!-- Node 1: Right -->
+        <div class="rm-node right reveal">
+          <div class="rm-arrow"></div>
+          <div class="rm-card glass">
+            <span class="rm-step">Phase 1</span>
+            <h3 class="rm-title">Basics & Fundamentals</h3>
+            <p class="rm-desc">Learn the fighting stance, core footwork, and balance. AI monitors your posture ensuring you build the correct muscle memory without bad habits.</p>
+          </div>
+        </div>
+
+        <!-- Node 2: Left -->
+        <div class="rm-node left reveal">
+          <div class="rm-arrow"></div>
+          <div class="rm-card glass">
+            <span class="rm-step">Phase 2</span>
+            <h3 class="rm-title">Striking Mechanics</h3>
+            <p class="rm-desc">Master the jab, cross, hooks, and uppercuts. Focus on speed, snap, and kinetic linking from your legs through your hips and into your fists.</p>
+          </div>
+        </div>
+
+        <!-- Node 3: Right -->
+        <div class="rm-node right reveal">
+          <div class="rm-arrow"></div>
+          <div class="rm-card glass">
+            <span class="rm-step">Phase 3</span>
+            <h3 class="rm-title">Core & Cardio Conditioning</h3>
+            <p class="rm-desc">Develop the gas tank required for a 5-round fight. High-intensity interval training tailored precisely to combat sports stamina generation.</p>
+          </div>
+        </div>
+
+        <!-- Node 4: Left -->
+        <div class="rm-node left reveal">
+          <div class="rm-arrow"></div>
+          <div class="rm-card glass">
+            <span class="rm-step">Phase 4</span>
+            <h3 class="rm-title">Defense & Evasion</h3>
+            <p class="rm-desc">Slips, rolls, parries, and blocking. The AI tracks head movement speed and reactivity so you can avoid incoming strikes gracefully.</p>
+          </div>
+        </div>
+
+        <!-- Node 5: Right -->
+        <div class="rm-node right reveal">
+          <div class="rm-arrow"></div>
+          <div class="rm-card glass">
+            <span class="rm-step">Phase 5</span>
+            <h3 class="rm-title">Advanced Combinations</h3>
+            <p class="rm-desc">Link strikes gracefully into terrifying combos. Understand pacing, range management, and how to set traps for your opponent.</p>
+          </div>
+        </div>
+
+        <!-- Node 6: Left -->
+        <div class="rm-node left reveal">
+          <div class="rm-arrow"></div>
+          <div class="rm-card glass">
+            <span class="rm-step">Phase 6</span>
+            <h3 class="rm-title">IronJaw Elite Challenge</h3>
+            <p class="rm-desc">Test all your skills into a multi-staged AI sparring crucible. Real-time feedback pushes your limits as if you have a world-class corner.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+{% endblock %}

@@ -18,4 +18,4 @@ def register_view(request):
     else:
         user_form = user_registration_form()
         profile_form = fighter_profile_form()
-    return render(request, "start_free.html", {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, "startfree.html", {'user_form': user_form, 'profile_form': profile_form})

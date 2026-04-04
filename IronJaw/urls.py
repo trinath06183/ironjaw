@@ -5,8 +5,9 @@ from IronJaw import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage_view, name='homepage'),
+    path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
-    path('start_free/', views.start_free_view, name='start_free'),
+    path('register/', views.register_view, name='register'),
     path('accounts/', include('accounts.urls')),
+    path('roadmap/', views.roadmap_view, name='roadmap'),
 ]
