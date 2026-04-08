@@ -27,3 +27,6 @@ def register_view(request):
 
 def roadmap_view(request):
     return render(request, 'roadmap.html')
+
+def dashboard_view(request):
+    return render(request, 'dashboard.html')

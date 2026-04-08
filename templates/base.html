@@ -982,6 +982,7 @@
       display: none;
       justify-content: flex-end;
       align-items: center;
+      overflow: visible;
     }
 
     @media(min-width:1024px) {
@@ -994,6 +995,7 @@
       position: relative;
       width: 340px;
       height: 340px;
+      overflow: visible;
     }
 
     .ring-outer {
@@ -1047,6 +1049,54 @@
 
     .float-card-val .red {
       color: var(--red);
+    }
+
+    /* ═══ Orbit Animation System ═══ */
+    .orbit-arm {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      transform-origin: 0 0;
+      animation: orbit-spin 5s linear infinite;
+      animation-delay: var(--orbit-delay, 0s);
+    }
+
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .orbit-card {
+      left: 140px;
+      top: 0;
+      margin-left: -60px; /* roughly center horizontally */
+      white-space: nowrap;
+      animation: orbit-counter 5s linear infinite !important;
+      animation-delay: var(--orbit-delay, 0s) !important;
+    }
+
+    /* Circular GIF orbiting element — stays upright via counter-rotation */
+    .orbit-gif {
+      position: absolute;
+      left: 130px;
+      top: 0;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2.5px solid var(--red);
+      box-shadow: 0 0 20px 4px rgba(239,68,68,0.45), 0 0 6px 1px rgba(239,68,68,0.3) inset;
+      transform: translateY(-50%) rotate(0deg);
+      animation: orbit-counter 5s linear infinite;
+      animation-delay: var(--orbit-delay, 0s);
+      display: block;
+    }
+
+    @keyframes orbit-counter {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to   { transform: translateY(-50%) rotate(-360deg); }
     }
 
     /* Scroll indicator */

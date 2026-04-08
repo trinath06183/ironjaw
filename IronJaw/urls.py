@@ -10,4 +10,5 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('accounts/', include('accounts.urls')),
     path('roadmap/', views.roadmap_view, name='roadmap'),
+    path('dashboard/', views.dashboard_view, name='dashboard'),
 ]
