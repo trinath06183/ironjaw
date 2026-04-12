@@ -19,8 +19,8 @@ class subscription(models.Model):
     payment_status= models.CharField(max_length=10,choices=status_choices)
     
     def is_active(self):
-        from datetime import date
-        return self.subscription_type == 'paid' and self.subscription_end_date >= date.today()   
+        from django.utils import timezone
+        return self.subscription_type == 'paid' and self.payment_status == 'active' and self.subscription_end_date >= timezone.now()   
     
     def __str__(self):
         return f"{self.user.username}'s Subscription — {self.subscription_type}"

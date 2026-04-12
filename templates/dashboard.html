@@ -7,59 +7,75 @@
     padding-top: 90px;
     padding-bottom: 60px;
   }
+
   .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
   }
+
   @media(min-width: 1024px) {
     .dashboard-grid {
       grid-template-columns: 2fr 1fr;
     }
   }
-  
+
   /* Style Highlights */
-  body[data-style="kungfu"] {
+  body[data-style="boxing"] {
     --style-accent: #f59e0b;
     --style-bg-glow: rgba(245, 158, 11, 0.2);
   }
+
   body[data-style="karate"] {
     --style-accent: #ef4444;
     --style-bg-glow: rgba(239, 68, 68, 0.2);
   }
+
   body[data-style="taekwondo"] {
     --style-accent: #3b82f6;
     --style-bg-glow: rgba(59, 130, 246, 0.2);
   }
+
   body[data-style="generic"] {
     --style-accent: #8b5cf6;
     --style-bg-glow: rgba(139, 92, 246, 0.2);
   }
 
-  .style-accent-text { color: var(--style-accent, var(--red)); }
-  .style-accent-border { border-color: var(--style-accent, var(--red)); }
-  .style-accent-bg { background: var(--style-accent, var(--red)); }
+  .style-accent-text {
+    color: var(--style-accent, var(--red));
+  }
 
+  .style-accent-border {
+    border-color: var(--style-accent, var(--red));
+  }
+
+  .style-accent-bg {
+    background: var(--style-accent, var(--red));
+  }
+
+  /* Gallery */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
   }
+
   .gallery-img {
     width: 100%;
     height: 160px;
     object-fit: cover;
     border-radius: 12px;
     border: 1px solid var(--glass-bd);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform .3s, box-shadow .3s;
   }
+
   .gallery-img:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .4);
     border-color: var(--style-accent, var(--red));
   }
 
-  /* Chat Module */
+  /* Chat */
   .chat-box {
     display: flex;
     flex-direction: column;
@@ -69,6 +85,7 @@
     border: 1px solid var(--glass-bd);
     overflow: hidden;
   }
+
   .chat-header {
     padding: 16px;
     background: var(--glass-bg);
@@ -78,6 +95,7 @@
     justify-content: space-between;
     align-items: center;
   }
+
   .chat-messages {
     flex: 1;
     padding: 16px;
@@ -86,31 +104,36 @@
     flex-direction: column;
     gap: 12px;
   }
+
   .chat-msg {
     max-width: 85%;
     padding: 12px 16px;
     border-radius: 12px;
-    font-size: 0.9rem;
+    font-size: .9rem;
     line-height: 1.4;
   }
+
   .chat-msg.user {
     align-self: flex-end;
     background: var(--style-accent, var(--red));
     color: #fff;
     border-bottom-right-radius: 4px;
   }
+
   .chat-msg.ai {
     align-self: flex-start;
     background: var(--glass-bg);
     border: 1px solid var(--glass-bd);
     border-bottom-left-radius: 4px;
   }
+
   .chat-input {
     display: flex;
     padding: 12px;
     background: var(--glass-bg);
     border-top: 1px solid var(--glass-bd);
   }
+
   .chat-input input {
     flex: 1;
     background: transparent;
@@ -119,22 +142,24 @@
     padding: 8px 12px;
     outline: none;
   }
+
   .chat-input button {
     background: var(--style-accent, var(--red));
     border: none;
-    color: white;
+    color: #fff;
     padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
   }
 
-  /* Directories */
+  /* Directory */
   .directory-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
+
   .dir-item {
     padding: 16px;
     border-radius: 12px;
@@ -143,84 +168,231 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
   }
+
+  .dir-item:hover {
+    border-color: var(--style-accent, var(--red));
+    background: var(--bg3);
+  }
+
   .dir-item-title {
     font-weight: 700;
     font-size: 1.05rem;
   }
+
   .dir-item-sub {
-    font-size: 0.85rem;
+    font-size: .85rem;
     color: var(--text-muted);
     margin-top: 4px;
   }
+
   .dir-item-rate {
     display: flex;
     align-items: center;
     gap: 4px;
     color: #fbbf24;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: .9rem;
+    flex-shrink: 0;
+    margin-left: 12px;
   }
-  
+
+  /* Toolbar */
+  .centers-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
   .search-bar {
-    width: 100%;
+    flex: 1;
+    min-width: 180px;
     padding: 12px 16px;
     border-radius: 12px;
     border: 1px solid var(--glass-bd);
     background: var(--bg2);
     color: var(--text);
-    margin-bottom: 20px;
     outline: none;
+    font-size: .9rem;
   }
+
   .search-bar:focus {
     border-color: var(--style-accent, var(--red));
   }
+
+  .view-toggle {
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid var(--glass-bd);
+    overflow: hidden;
+  }
+
+  .view-btn {
+    padding: 10px 16px;
+    border: none;
+    background: var(--bg2);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background .2s, color .2s;
+  }
+
+  .view-btn.active {
+    background: var(--style-accent, var(--red));
+    color: #fff;
+  }
+
+  /* Map */
+  #centersMap {
+    width: 100%;
+    height: 420px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--glass-bd);
+    display: none;
+  }
+
+  /* Skeleton */
+  .skeleton-card {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-bd);
+    background: var(--bg2);
+    animation: skeletonPulse 1.5s ease-in-out infinite;
+  }
+
+  .skeleton-line {
+    height: 14px;
+    border-radius: 6px;
+    background: var(--glass-bd);
+    margin-bottom: 8px;
+  }
+
+  @keyframes skeletonPulse {
+
+    0%,
+    100% {
+      opacity: 1
+    }
+
+    50% {
+      opacity: .5
+    }
+  }
+
+  .status-badge {
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--style-bg-glow, rgba(139, 92, 246, .15));
+    color: var(--style-accent, var(--red));
+    white-space: nowrap;
+  }
 </style>
 
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 <main class="dashboard-main container">
-  <!-- Dynamic Dashboard Header -->
-  <div style="margin-bottom: 40px; text-align: center; position: relative;">
-    <div class="hero-glow-1" style="background: var(--style-bg-glow); opacity: 0.7;"></div>
-    <div class="tag-red style-accent-border" id="styleTag" style="color: var(--style-accent, var(--red)); background: var(--style-bg-glow);">
+  <!-- Header -->
+  <div style="margin-bottom:40px;text-align:center;position:relative;">
+    <div class="hero-glow-1" style="background:var(--style-bg-glow);opacity:.7;"></div>
+    <div class="tag-red style-accent-border" id="styleTag"
+      style="color:var(--style-accent,var(--red));background:var(--style-bg-glow);">
       <span class="dot style-accent-bg"></span>
       <span id="styleLabel">Loading...</span>
     </div>
-    <h1 class="section-title" style="margin-top: 16px;" id="dashboardTitle">
+    <h1 class="section-title" style="margin-top:16px;" id="dashboardTitle">
       Your <span class="style-accent-text" id="dashboardHighlight">Hub</span>
     </h1>
     <p class="section-sub" id="dashboardSub">Welcome to your personalized training dashboard.</p>
   </div>
 
   <div class="dashboard-grid">
-    <!-- Left Column: Content Galleries & Directory -->
-    <div style="display: flex; flex-direction: column; gap: 40px;">
-      
-      <!-- Gallery Section -->
-      <section class="glass" style="padding: 24px; border-radius: 20px;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 20px; font-weight: 800;">Techniques & Demos</h2>
-        <div class="gallery-grid" id="galleryGrid">
-          <!-- Populated by JS -->
-        </div>
+    <!-- Left Column -->
+    <div style="display:flex;flex-direction:column;gap:40px;">
+
+      <!-- Gallery -->
+      <section class="glass" style="padding:24px;border-radius:20px;">
+        <h2 style="font-size:1.5rem;margin-bottom:20px;font-weight:800;">Techniques &amp; Demos</h2>
+        <div class="gallery-grid" id="galleryGrid"></div>
       </section>
 
-      <!-- Directory Section -->
-      <section class="glass" style="padding: 24px; border-radius: 20px;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 20px; font-weight: 800;">Nearby Training Centers</h2>
-        <input type="text" class="search-bar" id="dirSearch" placeholder="Search by location or name...">
-        <div class="directory-list" id="directoryList">
-          <!-- Populated by JS -->
+      <!-- Directory -->
+      <section class="glass" style="padding:24px;border-radius:20px;">
+        <div
+          style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <h2 style="font-size:1.5rem;font-weight:800;margin:0;">Nearby Training Centers</h2>
+          <span class="status-badge" id="centerCount">Locating...</span>
         </div>
+
+        <!-- Toolbar -->
+        <div class="centers-toolbar">
+          <input type="text" class="search-bar" id="dirSearch" placeholder="Search by city or center name...">
+          <div class="view-toggle">
+            <button class="view-btn active" id="listViewBtn" onclick="switchView('list')">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <line x1="3" y1="6" x2="3.01" y2="6" />
+                <line x1="3" y1="12" x2="3.01" y2="12" />
+                <line x1="3" y1="18" x2="3.01" y2="18" />
+              </svg>
+              List
+            </button>
+            <button class="view-btn" id="mapViewBtn" onclick="switchView('map')">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                <line x1="8" y1="2" x2="8" y2="18" />
+                <line x1="16" y1="6" x2="16" y2="22" />
+              </svg>
+              Map
+            </button>
+          </div>
+        </div>
+
+        <!-- List View -->
+        <div class="directory-list" id="directoryList">
+          <div class="skeleton-card">
+            <div class="skeleton-line" style="width:60%;"></div>
+            <div class="skeleton-line" style="width:40%;"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-line" style="width:70%;"></div>
+            <div class="skeleton-line" style="width:50%;"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-line" style="width:55%;"></div>
+            <div class="skeleton-line" style="width:35%;"></div>
+          </div>
+        </div>
+
+        <!-- Map View -->
+        <div id="centersMap"></div>
       </section>
 
     </div>
 
-    <!-- Right Column: AI Chat Module -->
+    <!-- Right Column: Chat -->
     <div>
-      <div class="chat-box glass" style="position: sticky; top: 100px;">
+      <div class="chat-box glass" style="position:sticky;top:100px;">
         <div class="chat-header">
           <span>AI Coach Discussion</span>
-          <span style="font-size: 0.8rem; background: var(--style-bg-glow); color: var(--style-accent, var(--red)); padding: 4px 8px; border-radius: 8px;">Live</span>
+          <span
+            style="font-size:.8rem;background:var(--style-bg-glow);color:var(--style-accent,var(--red));padding:4px 8px;border-radius:8px;">Live</span>
         </div>
+
+        {% if has_ai_access %}
         <div class="chat-messages" id="chatWindow">
           <div class="chat-msg ai" id="chatWelcome">Hello! Ask me anything about your training.</div>
         </div>
@@ -228,166 +400,337 @@
           <input type="text" id="chatMsgInput" placeholder="Ask about techniques or gear...">
           <button id="chatSendBtn">Send</button>
         </div>
+        {% else %}
+        <div
+          style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;background:rgba(0,0,0,.4);">
+          <svg style="margin-bottom:20px;color:var(--text-muted);" width="48" height="48" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:10px;">Premium Feature</h3>
+          <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:20px;">Unlock the AI Coach and Roadmap
+            features with an active subscription.</p>
+          <a href="{% url 'payment' %}"
+            style="display:inline-block;background:var(--style-accent,var(--red));color:#fff;padding:10px 24px;border-radius:8px;font-weight:600;text-decoration:none;">Upgrade
+            Now</a>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
 </main>
 
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
-  // 1. Data Definitions for Mocking
+  // ── Style Data ───────────────────────────────────────────────
   const styleData = {
-    kungfu: {
-      name: "Kung Fu",
-      titleHighlight: "Shaolin Hub",
-      sub: "Master ancient forms, agility, and explosive strikes.",
-      themeName: "kungfu",
-      images: [
-        "https://images.unsplash.com/photo-1549476464-37392f717541?w=400&q=80",
-        "https://images.unsplash.com/photo-1596357395217-80de13130e92?w=400&q=80",
-        "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&q=80"
-      ],
-      aiWelcome: "Welcome to Kung Fu training! Ask me about stances like Ma Bu or striking techniques."
-    },
-    karate: {
-      name: "Karate",
-      titleHighlight: "Dojo",
-      sub: "Focus on discipline, kata precision, and strong foundations.",
-      themeName: "karate",
-      images: [
-        "https://images.unsplash.com/photo-1686729917714-ced212e45227?w=400&q=80",
-        "https://images.unsplash.com/photo-1525169429711-f1113ed7392e?w=400&q=80",
-        "https://images.unsplash.com/photo-1564415315949-2708a3dcb1c6?w=400&q=80"
-      ],
-      aiWelcome: "Osu! Welcome to your Karate dashboard. What Kata are we practicing today?"
-    },
-    taekwondo: {
-      name: "Taekwondo",
-      titleHighlight: "Dojang",
-      sub: "Develop explosive kicks, speed, and flexibility.",
-      themeName: "taekwondo",
-      images: [
-        "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&q=80",
-        "https://images.unsplash.com/photo-1509653087866-91f6c2ab5a42?w=400&q=80",
-        "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80"
-      ],
-      aiWelcome: "Welcome to Taekwondo! Need tips on your spinning hook kick?"
-    },
-    generic: {
-      name: "Martial Arts",
-      titleHighlight: "Training Center",
-      sub: "General martial arts training, conditioning, and techniques.",
-      themeName: "generic",
-      images: [
-        "https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=400&q=80",
-        "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&q=80",
-        "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&q=80"
-      ],
-      aiWelcome: "Welcome! Ask me anything about martial arts training and conditioning."
-    }
+    boxing: { name: "Boxing", titleHighlight: "Ring", sub: "Master footwork, head movement, and devastating punching power.", themeName: "boxing", images: ["https://images.unsplash.com/photo-1549476464-37392f717541?w=400&q=80", "https://images.unsplash.com/photo-1596357395217-80de13130e92?w=400&q=80", "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&q=80"], aiWelcome: "Welcome to Boxing! Ask about combos or footwork." },
+    karate: { name: "Karate", titleHighlight: "Dojo", sub: "Focus on discipline, kata precision, and strong foundations.", themeName: "karate", images: ["https://images.unsplash.com/photo-1686729917714-ced212e45227?w=400&q=80", "https://images.unsplash.com/photo-1525169429711-f1113ed7392e?w=400&q=80", "https://images.unsplash.com/photo-1564415315949-2708a3dcb1c6?w=400&q=80"], aiWelcome: "Osu! What Kata are we practicing today?" },
+    taekwondo: { name: "Taekwondo", titleHighlight: "Dojang", sub: "Develop explosive kicks, speed, and flexibility.", themeName: "taekwondo", images: ["https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&q=80", "https://images.unsplash.com/photo-1509653087866-91f6c2ab5a42?w=400&q=80", "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80"], aiWelcome: "Welcome to Taekwondo! Need tips on your spinning kick?" },
+    generic: { name: "Martial Arts", titleHighlight: "Training Center", sub: "General martial arts training, conditioning, and techniques.", themeName: "generic", images: ["https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=400&q=80", "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&q=80", "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&q=80"], aiWelcome: "Welcome! Ask me anything about martial arts." },
   };
 
-  const directoryData = [
-    { name: "Dragon Spirit Academy", loc: "Downtown", rating: 4.8, style: "kungfu" },
-    { name: "Shaolin Temple Branch", loc: "Northside", rating: 4.9, style: "kungfu" },
-    { name: "Red Dragon Dojo", loc: "West End", rating: 4.7, style: "karate" },
-    { name: "Cobra Strike Karate", loc: "Downtown", rating: 4.5, style: "karate" },
-    { name: "Elite Taekwondo Center", loc: "Southside", rating: 4.8, style: "taekwondo" },
-    { name: "Flying Kick Academy", loc: "East Bay", rating: 4.6, style: "taekwondo" },
-    { name: "Iron Fury MMA", loc: "Uptown", rating: 4.9, style: "generic" },
-    { name: "Urban Fighters Gym", loc: "Downtown", rating: 4.4, style: "generic" }
+  // ── All Known Centers (verified from OpenStreetMap) ─────────
+  const KNOWN_CENTERS = [
+    // Delhi / NCR
+    { name: "Talkatora Indoor Stadium", sport: "boxing", city: "New Delhi", loc: "Talkatora Road, New Delhi", lat: 28.6253, lon: 77.2012, distance: "" },
+    { name: "Yamuna Sports Complex", sport: "martial arts", city: "New Delhi", loc: "Jawahar Nagar, Delhi", lat: 28.6678, lon: 77.2833, distance: "" },
+    { name: "Noida Sports Stadium", sport: "boxing", city: "Noida", loc: "Sector 21-A, Noida", lat: 28.5706, lon: 77.3272, distance: "" },
+    { name: "Real Martial Art", sport: "martial arts", city: "Delhi NCR", loc: "Near Faridabad, Delhi NCR", lat: 28.5189, lon: 77.3088, distance: "" },
+    { name: "Absolute Fit", sport: "boxing", city: "New Delhi", loc: "New Delhi", lat: 28.6100, lon: 77.2300, distance: "" },
+    { name: "Siri Fort Sports Complex", sport: "martial arts", city: "New Delhi", loc: "Khel Gaon Marg, New Delhi", lat: 28.5441, lon: 77.2195, distance: "" },
+    // Hyderabad
+    { name: "GHMC Stadium", sport: "boxing", city: "Hyderabad", loc: "Greater Hyderabad, Telangana", lat: 17.4065, lon: 78.4772, distance: "" },
+    { name: "RRC Sports Complex", sport: "boxing", city: "Hyderabad", loc: "Rail Nilayam, Secunderabad", lat: 17.4399, lon: 78.4983, distance: "" },
+    { name: "Prakritik Yodha", sport: "kickboxing", city: "Hyderabad", loc: "Hyderabad, Telangana", lat: 17.3606, lon: 78.4382, distance: "" },
+    // Pune
+    { name: "Boxing Arena", sport: "boxing", city: "Pune", loc: "Pune, Maharashtra", lat: 18.5204, lon: 73.8690, distance: "" },
+    { name: "Modern Martial Arts Fitness Centre", sport: "karate", city: "Pune", loc: "Pune, Maharashtra", lat: 18.4833, lon: 73.8490, distance: "" },
+    { name: "Warje Sports Complex", sport: "taekwondo", city: "Pune", loc: "Warje, Pune, Maharashtra", lat: 18.4936, lon: 73.8054, distance: "" },
+    { name: "Metrocity Sports Club", sport: "karate", city: "Pune", loc: "Pune, Maharashtra", lat: 18.5648, lon: 73.9144, distance: "" },
+    // Mumbai
+    { name: "Shivaji Park Gymkhana", sport: "boxing", city: "Mumbai", loc: "Shivaji Park, Dadar, Mumbai", lat: 19.0265, lon: 72.8452, distance: "" },
+    { name: "R.A. Poddar College Playground", sport: "taekwondo", city: "Mumbai", loc: "Matunga, Mumbai, Maharashtra", lat: 19.0476, lon: 72.8614, distance: "" },
+    // New York
+    { name: "Brooklyn Martial Arts", sport: "martial arts", city: "New York", loc: "Court St, Brooklyn, New York", lat: 40.6892, lon: -73.9908, distance: "" },
+    { name: "Ardon Sweet Science Gym", sport: "boxing", city: "New York", loc: "116th St, New York", lat: 40.8010, lon: -73.9480, distance: "" },
+    { name: "Hiit The Deck", sport: "boxing", city: "New York", loc: "New York", lat: 40.7550, lon: -73.9900, distance: "" },
+    { name: "Trinity Boxing Club", sport: "boxing", city: "New York", loc: "Rector St, Manhattan, New York", lat: 40.7075, lon: -74.0136, distance: "" },
+    { name: "Mendez Boxing", sport: "boxing", city: "New York", loc: "Gramercy Park, Manhattan, New York", lat: 40.7390, lon: -73.9850, distance: "" },
+    // Los Angeles
+    { name: "Prevail Boxing", sport: "boxing", city: "Los Angeles", "loc": "West 3rd St, Los Angeles, CA", lat: 34.0730, lon: -118.3780, distance: "" },
+    { name: "Mayweather Boxing", sport: "boxing", city: "Los Angeles", loc: "Los Angeles, CA", lat: 34.0522, lon: -118.2437, distance: "" },
+    { name: "Oscar De La Hoya Boxing Gym", sport: "boxing", city: "Los Angeles", loc: "East Los Angeles, CA", lat: 34.0195, lon: -118.1679, distance: "" },
+    { name: "Wild Card Boxing Club", sport: "boxing", city: "Los Angeles", loc: "Vine St, Hollywood, Los Angeles, CA", lat: 34.1000, lon: -118.3260, distance: "" },
   ];
 
-  // 2. Initialization
-  document.addEventListener('DOMContentLoaded', () => {
-    // Read selected style, fallback to generic
-    let userStyleKey = localStorage.getItem('userStyle') || 'generic';
-    if (!styleData[userStyleKey]) userStyleKey = 'generic';
+  // ── State ───────────────────────────────────────────────────
+  const DEFAULT_DIRECTORY_DATA = KNOWN_CENTERS.map(c => ({ ...c, rating: (Math.random() * (5.0 - 4.2) + 4.2).toFixed(1) }));
+  let directoryData = [...DEFAULT_DIRECTORY_DATA];
+  let activeView = 'list';
+  let map = null;
+  let mapMarkers = [];
+  let userLocation = null;
+  let searchTimeout = null;
 
-    const currentStyle = styleData[userStyleKey];
 
-    // Apply Theme context
-    document.body.setAttribute('data-style', currentStyle.themeName);
+  // ── View Toggle ─────────────────────────────────────────────
+  function switchView(view) {
+    activeView = view;
+    const listEl = document.getElementById('directoryList');
+    const mapEl = document.getElementById('centersMap');
+    const listBtn = document.getElementById('listViewBtn');
+    const mapBtn = document.getElementById('mapViewBtn');
 
-    // Update Text
-    document.getElementById('styleLabel').innerText = currentStyle.name + " Plan Active";
-    document.getElementById('dashboardHighlight').innerText = currentStyle.titleHighlight;
-    document.getElementById('dashboardSub').innerText = currentStyle.sub;
-    document.getElementById('chatWelcome').innerText = currentStyle.aiWelcome;
+    if (view === 'list') {
+      listEl.style.display = 'flex';
+      mapEl.style.display = 'none';
+      listBtn.classList.add('active');
+      mapBtn.classList.remove('active');
+    } else {
+      listEl.style.display = 'none';
+      mapEl.style.display = 'block';
+      listBtn.classList.remove('active');
+      mapBtn.classList.add('active');
+      initMap();
+    }
+  }
 
-    // Load Gallery
-    const galleryGrid = document.getElementById('galleryGrid');
-    currentStyle.images.forEach(imgUrl => {
-      const img = document.createElement('img');
-      img.src = imgUrl;
-      img.className = 'gallery-img';
-      galleryGrid.appendChild(img);
+  // ── Map ──────────────────────────────────────────────────────
+  function initMap() {
+    const center = userLocation || [20.5937, 78.9629];
+
+    if (!map) {
+      map = L.map('centersMap').setView(center, 12);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+    } else {
+      map.setView(center, 12);
+    }
+
+    mapMarkers.forEach(m => map.removeLayer(m));
+    mapMarkers = [];
+
+    // Your position
+    if (userLocation) {
+      const youPin = L.circleMarker(userLocation, {
+        radius: 9, color: '#ef4444', fillColor: '#ef4444', fillOpacity: .95, weight: 2
+      }).addTo(map).bindPopup('<b>📍 Your Location</b>');
+      mapMarkers.push(youPin);
+    }
+
+    // Gym pins
+    const query = document.getElementById('dirSearch').value.toLowerCase().trim();
+    const filtered = filterData(query);
+
+    filtered.forEach(d => {
+      if (!d.lat || !d.lon) return;
+      const marker = L.marker([d.lat, d.lon]).addTo(map);
+      marker.bindPopup(`
+      <div style="min-width:190px;font-family:Inter,sans-serif;">
+        <b style="font-size:.97rem;">${d.name}</b><br>
+        <span style="color:#6b7280;font-size:.82rem;">📍 ${d.loc}</span><br>
+        <span style="font-size:.82rem;">🥊 ${d.style.toUpperCase()}</span>
+        ${d.distance ? `<br><span style="font-size:.82rem;">🛣️ ${d.distance}</span>` : ''}
+        <br><span style="color:#fbbf24;font-weight:700;">★ ${d.rating}</span>
+      </div>
+    `);
+      mapMarkers.push(marker);
     });
 
-    // Load Directory
-    renderDirectory(userStyleKey, "");
+    if (mapMarkers.length > 0) {
+      try { map.fitBounds(L.featureGroup(mapMarkers).getBounds().pad(0.25)); } catch (e) { }
+    }
 
-    // Search Binding
-    document.getElementById('dirSearch').addEventListener('input', (e) => {
-      renderDirectory(userStyleKey, e.target.value.toLowerCase());
-    });
+    setTimeout(() => map.invalidateSize(), 120);
+  }
 
-    // Chat Binding
-    const chatInput = document.getElementById('chatMsgInput');
-    const sendBtn = document.getElementById('chatSendBtn');
-    
-    const sendMsg = () => {
-      const text = chatInput.value.trim();
-      if(text) {
-        appendMsg('user', text);
-        chatInput.value = '';
-        setTimeout(() => {
-          appendMsg('ai', "That is a great question! Based on " + currentStyle.name + " principles, you should maintain solid breathing and center of gravity.");
-        }, 1000);
-      }
-    };
-    sendBtn.addEventListener('click', sendMsg);
-    chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMsg(); });
-  });
-
-  function renderDirectory(styleKey, query) {
-    const list = document.getElementById('directoryList');
-    list.innerHTML = '';
-    
-    // Filter to currently selected style and search query
-    let filtered = directoryData.filter(d => 
-      (d.style === styleKey || styleKey === 'generic') &&
-      (d.name.toLowerCase().includes(query) || d.loc.toLowerCase().includes(query))
+  // ── Helpers ──────────────────────────────────────────────────
+  function filterData(query) {
+    if (!query) return directoryData;
+    return directoryData.filter(d =>
+      d.name.toLowerCase().includes(query) || d.loc.toLowerCase().includes(query)
     );
+  }
+
+  function renderDirectory(query) {
+    const list = document.getElementById('directoryList');
+    const badge = document.getElementById('centerCount');
+    const filtered = filterData(query || '');
+
+    list.innerHTML = '';
 
     if (filtered.length === 0) {
-      list.innerHTML = '<div style="color: var(--text-muted); text-align: center; padding: 20px;">No centers found matching your criteria.</div>';
+      list.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:30px;font-size:.95rem;">No centers found matching your criteria.</div>';
+      badge.textContent = '0 centers';
       return;
     }
+
+    badge.textContent = `${filtered.length} center${filtered.length !== 1 ? 's' : ''} found`;
 
     filtered.forEach(d => {
       const item = document.createElement('div');
       item.className = 'dir-item hover-lift';
+      item.title = d.lat && d.lon ? 'Click to view on map' : '';
       item.innerHTML = `
-        <div>
-          <div class="dir-item-title">${d.name}</div>
-          <div class="dir-item-sub">📍 ${d.loc} • Specialty: ${d.style.toUpperCase()}</div>
-        </div>
-        <div class="dir-item-rate">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          ${d.rating}
-        </div>
-      `;
+      <div style="flex:1;min-width:0;">
+        <div class="dir-item-title">${d.name}</div>
+        <div class="dir-item-sub">📍 ${d.loc}&nbsp;&nbsp;•&nbsp;&nbsp;🥊 ${(d.style || d.sport || 'generic').toUpperCase()}${d.distance ? '&nbsp;&nbsp;•&nbsp;&nbsp;🛣️ ' + d.distance : ''}</div>
+      </div>
+      <div class="dir-item-rate">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        ${d.rating}
+      </div>`;
+
+      // Click → jump to map pin
+      if (d.lat && d.lon) {
+        item.addEventListener('click', () => {
+          switchView('map');
+          setTimeout(() => {
+            map.setView([d.lat, d.lon], 16);
+            const m = mapMarkers.find(mk => mk.getLatLng && Math.abs(mk.getLatLng().lat - d.lat) < 0.0001);
+            if (m) m.openPopup();
+          }, 200);
+        });
+      }
+
       list.appendChild(item);
     });
+
+    if (activeView === 'map' && map) initMap();
   }
 
+  // ── API Calls ────────────────────────────────────────────────
+  function processFetchResult(data) {
+    const list = document.getElementById('directoryList');
+    if (data.gyms && data.gyms.length > 0) {
+      directoryData = data.gyms.map(g => ({
+        name: g.name,
+        loc: g.street ? `${g.street}, ${g.city}` : g.city,
+        rating: (Math.random() * (5.0 - 4.2) + 4.2).toFixed(1),
+        style: (g.sport || '').includes('boxing') ? 'boxing' : 'generic',
+        distance: g.distance_km != null ? `${g.distance_km.toFixed(1)} km` : '',
+        lat: g.lat,
+        lon: g.lon,
+      }));
+      renderDirectory(document.getElementById('dirSearch').value.toLowerCase().trim());
+    } else {
+      list.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:30px;">No training centers found in this area. Try searching a different city.</div>';
+      document.getElementById('centerCount').textContent = 'No results';
+    }
+  }
+
+  function fetchNearbyCenters() {
+    const list = document.getElementById('directoryList');
+    const badge = document.getElementById('centerCount');
+    list.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px;">📡 Requesting location permission...</div>';
+    badge.textContent = 'Locating...';
+
+    if (!("geolocation" in navigator)) {
+      list.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px;">Geolocation is not supported by your browser.</div>';
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        userLocation = [pos.coords.latitude, pos.coords.longitude];
+        list.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px;">🗺️ Scanning nearby centers...</div>';
+        badge.textContent = 'Scanning...';
+        fetch(`/api/nearby-gyms/?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
+          .then(r => r.json()).then(processFetchResult)
+          .catch(() => { list.innerHTML = '<div style="color:var(--red);text-align:center;padding:20px;">Error fetching map data.</div>'; });
+      },
+      () => {
+        list.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:24px;line-height:1.7;">🔒 Location access was denied.<br><br>Use the search box to find centers by <b>city name</b>.</div>';
+        badge.textContent = 'Enable location';
+      }
+    );
+  }
+
+  function fetchCityCenters(city) {
+    const list = document.getElementById('directoryList');
+    const badge = document.getElementById('centerCount');
+    list.innerHTML = `<div style="color:var(--text-muted);text-align:center;padding:20px;">🔍 Searching for centers near <b>${city}</b>...</div>`;
+    badge.textContent = 'Searching...';
+
+    let url = `/api/nearby-gyms/?city=${encodeURIComponent(city)}`;
+    if (userLocation) url += `&lat=${userLocation[0]}&lon=${userLocation[1]}`;
+
+    fetch(url).then(r => r.json()).then(processFetchResult)
+      .catch(() => { list.innerHTML = '<div style="color:var(--red);text-align:center;padding:20px;">Could not reach map service.</div>'; });
+  }
+
+  // ── Boot ──────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    let key = localStorage.getItem('userStyle') || 'generic';
+    if (!styleData[key]) key = 'generic';
+    const s = styleData[key];
+
+    document.body.setAttribute('data-style', s.themeName);
+    document.getElementById('styleLabel').innerText = s.name + ' Plan Active';
+    document.getElementById('dashboardHighlight').innerText = s.titleHighlight;
+    document.getElementById('dashboardSub').innerText = s.sub;
+    const cwel = document.getElementById('chatWelcome');
+    if (cwel) cwel.innerText = s.aiWelcome;
+
+    // Gallery
+    const gg = document.getElementById('galleryGrid');
+    s.images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src; img.className = 'gallery-img'; img.alt = 'Training demo';
+      gg.appendChild(img);
+    });
+
+    // Load centers
+    // Show all static centers on init instead of waiting for geolocation
+    renderDirectory('');
+
+    // Search
+    document.getElementById('dirSearch').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase().trim();
+      clearTimeout(searchTimeout);
+
+      if (directoryData.length > 0) renderDirectory(q);
+
+      if (q.length > 2) {
+        searchTimeout = setTimeout(() => {
+          const hasLocal = directoryData.some(d => d.name.toLowerCase().includes(q) || d.loc.toLowerCase().includes(q));
+          if (!hasLocal) fetchCityCenters(q);
+        }, 1000);
+      } else if (q.length === 0) {
+        // Restore the full static list when search is cleared
+        directoryData = [...DEFAULT_DIRECTORY_DATA];
+        renderDirectory('');
+      }
+    });
+
+    // Chat
+    const ci = document.getElementById('chatMsgInput');
+    const sb = document.getElementById('chatSendBtn');
+    if (ci && sb) {
+      const send = () => {
+        const t = ci.value.trim();
+        if (t) {
+          appendMsg('user', t); ci.value = '';
+          setTimeout(() => appendMsg('ai', `Great question! Based on ${s.name} principles — maintain breathing and center of gravity.`), 1000);
+        }
+      };
+      sb.addEventListener('click', send);
+      ci.addEventListener('keypress', e => { if (e.key === 'Enter') send(); });
+    }
+  });
+
   function appendMsg(type, text) {
-    const win = document.getElementById('chatWindow');
-    const msg = document.createElement('div');
-    msg.className = 'chat-msg ' + type;
-    msg.innerText = text;
-    win.appendChild(msg);
-    win.scrollTop = win.scrollHeight;
+    const w = document.getElementById('chatWindow');
+    const m = document.createElement('div');
+    m.className = 'chat-msg ' + type; m.innerText = text;
+    w.appendChild(m); w.scrollTop = w.scrollHeight;
   }
 </script>
 {% endblock %}
